@@ -1,6 +1,6 @@
 # Benchmark for perceptual hashes in face recognition systems
 
-This is a project based on a thesis by the creators.
+This is a project created for a thesis by the following creators.
 - Martin Hafstad
 - Henrik (Endroma, Heste)
 
