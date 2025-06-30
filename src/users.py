@@ -1,3 +1,4 @@
+from itertools import product
 from typing import Optional
 from pathlib import Path
 from db import Db
@@ -9,7 +10,7 @@ USERDB = "users"
 
 
 class User:
-    def __init__(self, userid: str, img_names: dict[str, str]) -> None:
+    def __init__(self, userid: str, img_names: list[str]) -> None:
         self.userid = userid
         self.img_names = img_names
 
@@ -25,14 +26,14 @@ class User:
 
     @property
     def images(self) -> list[str]:
-        return list(self.img_names.keys())
+        return self.img_names
 
     @classmethod
     def create_user(cls, userid: str, path: Optional[Path] = None) -> Optional["User"]:
         """Creates a user with already known image names or created empty"""
         logging.debug(f"Creating user {userid} from path {path}")
 
-        user = cls(userid, {})
+        user = cls(userid, [])
 
         if path is None:
             return user
@@ -75,9 +76,8 @@ class User:
 
     def add_data(self, path: Path) -> None:
         if path.is_file():
-            hash_str = PathSha256.crypto_hash(path)
-            data = {"user": self.userid, "filename": path.name, "hash": str(hash_str)}
-            self.img_names.update(data)
+            # hash_str = PathSha256.crypto_hash(path)
+            self.img_names.append(path.name)
             return None
 
         if not path.is_dir():
@@ -85,14 +85,16 @@ class User:
             return None
 
         paths = list(filter(lambda p: p.is_file(), path.rglob("*")))
+        path_names = [p.name for p in paths]
+        logging.debug(f"Loaded paths {paths} to be bound to user {self.userid}")
 
-        names = map(lambda p: p.name, paths)
+        # names = map(lambda p: p.name, paths)
 
-        hashes = map(lambda h: str(PathSha256.crypto_hash(h)), paths)
+        # hashes = map(lambda h: str(PathSha256.crypto_hash(h)), paths)
 
-        data = dict(zip(names, hashes))
+        # data = dict(zip(hashes, names))
 
-        self.img_names.update(data)
+        self.img_names.extend(path_names)
 
     def save_to_db(self, db_name: str = USERDB):
         db = Db(db_name)
@@ -107,12 +109,7 @@ class User:
             if choice != "y":
                 return None
 
-        entries = []
-        for name, value in self.img_names.items():
-            entry = {"userid": self.userid, "filename": name, "hash": hash}
-            entries.append(entry)
-
-        map(db.add, entries)
+        db.add(self.img_names, self.userid)
 
         db.save()
 

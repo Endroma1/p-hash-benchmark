@@ -9,7 +9,6 @@ from pickle_img import PickleableImage
 from modify_image import Base, Flip, ModImage, ModImageBuilder, Modification
 from matching import MatchingProcess, MatchResult
 from multiprocessing import Event, Process, Queue, Pool, current_process
-from tqdm import tqdm
 import logging
 import argparse
 
@@ -35,6 +34,9 @@ class Config:
             "--gen",
             action="store_true",
             help="Generates hashes and sends to db. Essentially the main program without modifying or matching.",
+        )
+        self.parser.add_argument(
+            "-x", "--benchmark", action="store_true", help="Starts the benchmark"
         )
 
     def parse(self):
@@ -100,16 +102,19 @@ class Benchmark:
         for p in openers:
             p.join()
 
+        logging.info("Opened all images")
         [q_imgs.put(STOP) for _ in range(self.img_modifiers)]
 
         for p in modifiers:
             p.join()
 
+        logging.info("modified all images")
         [q_mods.put(STOP) for _ in range(self.img_hashers)]
 
         for p in hashers:
             p.join()
 
+        logging.info("hashed all images")
         while not q_hashes.empty():
             hash = q_hashes.get()
             if isinstance(hash, StopSignal):
@@ -258,7 +263,6 @@ class BenchmarkBuilder:
         return self
 
     def run(self):
-
         logging.info(
             "Starting benchmark with method=%s, input_images=%d images, mods=%s, "
             "img_openers=%d, img_modifiers=%d, img_hashers=%d, result_calculators=%d",
@@ -344,7 +348,6 @@ class DbGen:
         [h.save_to_db() for h in hashes]
 
     def _open_img(self, q_paths: Queue, q_output: Queue) -> Optional[Image.Image]:
-
         while True:
             path = q_paths.get()
 

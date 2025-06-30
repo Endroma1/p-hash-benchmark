@@ -13,11 +13,6 @@ TEST_HASHING_METHOD = AverageHash
 
 
 def main():
-    paths = [p for p in TEST_IMG_FOLDER.rglob("*") if p.is_file()]
-    logging.debug(f"Using images in dir {TEST_IMG_FOLDER}")
-    BenchmarkBuilder(paths).set_img_openers(2).set_img_hashers(4).set_img_modifiers(
-        4
-    ).run()
     args = Config().parse()
 
     if args.create_user is not None:
@@ -44,6 +39,13 @@ def main():
         if args.dir is not None:
             logging.info(f"Generating database with dir {args.dir}")
             DbGen(args.dir, TEST_HASHING_METHOD).dbgen()
+
+    if args.benchmark:
+        paths = [p for p in TEST_IMG_FOLDER.rglob("*") if p.is_file()]
+        logging.debug(f"Using images in dir {TEST_IMG_FOLDER}")
+        BenchmarkBuilder(paths).set_img_openers(2).set_img_hashers(4).set_img_modifiers(
+            4
+        ).run()
 
 
 if __name__ == "__main__":

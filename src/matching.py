@@ -62,7 +62,6 @@ class MatchingProcess:
 
     def start(self):
         for img_hash in self.db_hashes:
-
             result = MatchResult(self.image_hash.name, img_hash.name)
 
             if self.image_hash.user() == img_hash.user():

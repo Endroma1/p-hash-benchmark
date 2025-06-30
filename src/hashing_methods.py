@@ -108,8 +108,7 @@ class ImageHash:
 
     @classmethod
     def load_all_hashes_from_db(cls, hashing_method) -> list["ImageHash"]:
-
-        db = Db(hashing_method)
+        db = Db(f"hashes_{hashing_method}")
         db_data: dict[str, list[dict[str, str]]] = db.data
         del db
 
@@ -196,7 +195,6 @@ class AverageHash(HashMethod):
         super().__init__("average_hash", img_path, img, hash_len)
 
     def hash(self) -> str:
-
         grayscale = self.img.convert("L")
         resize = grayscale.resize((self.hash_len, self.hash_len))
 

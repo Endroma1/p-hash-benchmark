@@ -7,7 +7,6 @@ JSON_DEFAULT_FOLDER = Path.cwd() / "db-hashes"  # Directory for db structure
 
 
 class Db:
-
     def __init__(self, db_name: str, create_db: bool = True) -> None:
         """Initiates the db"""
         self.db_name = db_name
@@ -39,6 +38,11 @@ class Db:
         if self.db_data.get(key) is None:
             self.db_data.update({key: data})
             return None
+
+        else:
+            self.update(data, key)
+
+    def update(self, data: dict | list, key):
         if isinstance(data, list):
             self.db_data[key].extend(data)
         if isinstance(data, dict):
@@ -66,7 +70,6 @@ class Db:
                 if target in value:
                     return (str(key), str(target))
 
-            logging.debug(f"{value} == {target}")
             if value == target:
                 return (str(key), str(value))
 
@@ -100,7 +103,6 @@ class DbProcess:
             logging.error(f"Could not save to json {self.db.db_data}, {e}")
 
     def load(self):
-
         with open(self.db_file, mode="r", encoding="utf-8") as f:
             db_data = json.load(f)
             logging.info(f"Loaded db from {self.db.name}")
@@ -112,7 +114,7 @@ class DbProcess:
         file = JSON_DEFAULT_FOLDER / f"{self.db.name}.json"
 
         if file.exists():
-            logging.warning(f"Db {self.db.name} already exists")
+            # logging.warning(f"Db {self.db.name} already exists")
             return None
 
         try:
@@ -124,7 +126,6 @@ class DbProcess:
             logging.error(f"Could not create db {self.db.name}, {e}")
 
     def delete_db(self) -> None:
-
         file = JSON_DEFAULT_FOLDER / f"{self.db.name}.json"
 
         file.unlink()
