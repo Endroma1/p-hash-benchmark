@@ -1,0 +1,2314 @@
+{
+  "Matches": [
+    {
+      "input_img": "WIN_20250218_09_46_08_Pro.jpg",
+      "db_img": "IMG_0654.jpg",
+      "hamming_distance": 133,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "WIN_20250218_09_46_08_Pro.jpg",
+      "db_img": "WIN_20250218_09_46_08_Pro.jpg",
+      "hamming_distance": 0,
+      "is_same_user": true,
+      "is_same_image": true
+    },
+    {
+      "input_img": "WIN_20250218_09_46_08_Pro.jpg",
+      "db_img": "WIN_20250218_09_46_03_Pro.jpg",
+      "hamming_distance": 2,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "WIN_20250218_09_46_08_Pro.jpg",
+      "db_img": "IMG_0651.jpg",
+      "hamming_distance": 133,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "WIN_20250218_09_46_08_Pro.jpg",
+      "db_img": "WIN_20250218_09_46_11_Pro.jpg",
+      "hamming_distance": 1,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "WIN_20250218_09_46_08_Pro.jpg",
+      "db_img": "WIN_20250218_09_45_56_Pro.jpg",
+      "hamming_distance": 0,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "WIN_20250218_09_46_08_Pro.jpg",
+      "db_img": "WIN_20250218_09_45_59_Pro.jpg",
+      "hamming_distance": 2,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "WIN_20250218_09_46_08_Pro.jpg",
+      "db_img": "IMG_0653.jpg",
+      "hamming_distance": 136,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "WIN_20250218_09_46_08_Pro.jpg",
+      "db_img": "WIN_20250218_09_46_13_Pro.jpg",
+      "hamming_distance": 1,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "WIN_20250218_09_46_08_Pro.jpg",
+      "db_img": "IMG_0652.jpg",
+      "hamming_distance": 130,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "WIN_20250218_09_46_08_Pro.jpg",
+      "db_img": "WIN_20250218_09_46_06_Pro.jpg",
+      "hamming_distance": 4,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "WIN_20250218_09_46_08_Pro.jpg",
+      "db_img": "IMG_0654.jpg",
+      "hamming_distance": 133,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "WIN_20250218_09_46_08_Pro.jpg",
+      "db_img": "WIN_20250218_09_46_08_Pro.jpg",
+      "hamming_distance": 0,
+      "is_same_user": true,
+      "is_same_image": true
+    },
+    {
+      "input_img": "WIN_20250218_09_46_08_Pro.jpg",
+      "db_img": "WIN_20250218_09_46_03_Pro.jpg",
+      "hamming_distance": 2,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "WIN_20250218_09_46_08_Pro.jpg",
+      "db_img": "IMG_0651.jpg",
+      "hamming_distance": 133,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "WIN_20250218_09_46_08_Pro.jpg",
+      "db_img": "WIN_20250218_09_46_11_Pro.jpg",
+      "hamming_distance": 1,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "WIN_20250218_09_46_08_Pro.jpg",
+      "db_img": "WIN_20250218_09_45_56_Pro.jpg",
+      "hamming_distance": 0,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "WIN_20250218_09_46_08_Pro.jpg",
+      "db_img": "WIN_20250218_09_45_59_Pro.jpg",
+      "hamming_distance": 2,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "WIN_20250218_09_46_08_Pro.jpg",
+      "db_img": "IMG_0653.jpg",
+      "hamming_distance": 136,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "WIN_20250218_09_46_08_Pro.jpg",
+      "db_img": "WIN_20250218_09_46_13_Pro.jpg",
+      "hamming_distance": 1,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "WIN_20250218_09_46_08_Pro.jpg",
+      "db_img": "IMG_0652.jpg",
+      "hamming_distance": 130,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "WIN_20250218_09_46_08_Pro.jpg",
+      "db_img": "WIN_20250218_09_46_06_Pro.jpg",
+      "hamming_distance": 4,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "WIN_20250218_09_46_03_Pro.jpg",
+      "db_img": "IMG_0654.jpg",
+      "hamming_distance": 135,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "WIN_20250218_09_46_03_Pro.jpg",
+      "db_img": "WIN_20250218_09_46_08_Pro.jpg",
+      "hamming_distance": 2,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "WIN_20250218_09_46_03_Pro.jpg",
+      "db_img": "WIN_20250218_09_46_03_Pro.jpg",
+      "hamming_distance": 0,
+      "is_same_user": true,
+      "is_same_image": true
+    },
+    {
+      "input_img": "WIN_20250218_09_46_03_Pro.jpg",
+      "db_img": "IMG_0651.jpg",
+      "hamming_distance": 133,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "WIN_20250218_09_46_03_Pro.jpg",
+      "db_img": "WIN_20250218_09_46_11_Pro.jpg",
+      "hamming_distance": 1,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "WIN_20250218_09_46_03_Pro.jpg",
+      "db_img": "WIN_20250218_09_45_56_Pro.jpg",
+      "hamming_distance": 2,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "WIN_20250218_09_46_03_Pro.jpg",
+      "db_img": "WIN_20250218_09_45_59_Pro.jpg",
+      "hamming_distance": 0,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "WIN_20250218_09_46_03_Pro.jpg",
+      "db_img": "IMG_0653.jpg",
+      "hamming_distance": 136,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "WIN_20250218_09_46_03_Pro.jpg",
+      "db_img": "WIN_20250218_09_46_13_Pro.jpg",
+      "hamming_distance": 1,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "WIN_20250218_09_46_03_Pro.jpg",
+      "db_img": "IMG_0652.jpg",
+      "hamming_distance": 130,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "WIN_20250218_09_46_03_Pro.jpg",
+      "db_img": "WIN_20250218_09_46_06_Pro.jpg",
+      "hamming_distance": 2,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "WIN_20250218_09_46_03_Pro.jpg",
+      "db_img": "IMG_0654.jpg",
+      "hamming_distance": 135,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "WIN_20250218_09_46_03_Pro.jpg",
+      "db_img": "WIN_20250218_09_46_08_Pro.jpg",
+      "hamming_distance": 2,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "WIN_20250218_09_46_03_Pro.jpg",
+      "db_img": "WIN_20250218_09_46_03_Pro.jpg",
+      "hamming_distance": 0,
+      "is_same_user": true,
+      "is_same_image": true
+    },
+    {
+      "input_img": "WIN_20250218_09_46_03_Pro.jpg",
+      "db_img": "IMG_0651.jpg",
+      "hamming_distance": 133,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "WIN_20250218_09_46_03_Pro.jpg",
+      "db_img": "WIN_20250218_09_46_11_Pro.jpg",
+      "hamming_distance": 1,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "WIN_20250218_09_46_03_Pro.jpg",
+      "db_img": "WIN_20250218_09_45_56_Pro.jpg",
+      "hamming_distance": 2,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "WIN_20250218_09_46_03_Pro.jpg",
+      "db_img": "WIN_20250218_09_45_59_Pro.jpg",
+      "hamming_distance": 0,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "WIN_20250218_09_46_03_Pro.jpg",
+      "db_img": "IMG_0653.jpg",
+      "hamming_distance": 136,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "WIN_20250218_09_46_03_Pro.jpg",
+      "db_img": "WIN_20250218_09_46_13_Pro.jpg",
+      "hamming_distance": 1,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "WIN_20250218_09_46_03_Pro.jpg",
+      "db_img": "IMG_0652.jpg",
+      "hamming_distance": 130,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "WIN_20250218_09_46_03_Pro.jpg",
+      "db_img": "WIN_20250218_09_46_06_Pro.jpg",
+      "hamming_distance": 2,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "WIN_20250218_09_46_11_Pro.jpg",
+      "db_img": "IMG_0654.jpg",
+      "hamming_distance": 134,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "WIN_20250218_09_46_11_Pro.jpg",
+      "db_img": "WIN_20250218_09_46_08_Pro.jpg",
+      "hamming_distance": 1,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "WIN_20250218_09_46_11_Pro.jpg",
+      "db_img": "WIN_20250218_09_46_03_Pro.jpg",
+      "hamming_distance": 1,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "WIN_20250218_09_46_11_Pro.jpg",
+      "db_img": "IMG_0651.jpg",
+      "hamming_distance": 134,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "WIN_20250218_09_46_11_Pro.jpg",
+      "db_img": "WIN_20250218_09_46_11_Pro.jpg",
+      "hamming_distance": 0,
+      "is_same_user": true,
+      "is_same_image": true
+    },
+    {
+      "input_img": "WIN_20250218_09_46_11_Pro.jpg",
+      "db_img": "WIN_20250218_09_45_56_Pro.jpg",
+      "hamming_distance": 1,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "WIN_20250218_09_46_11_Pro.jpg",
+      "db_img": "WIN_20250218_09_45_59_Pro.jpg",
+      "hamming_distance": 1,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "WIN_20250218_09_46_11_Pro.jpg",
+      "db_img": "IMG_0653.jpg",
+      "hamming_distance": 137,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "WIN_20250218_09_46_11_Pro.jpg",
+      "db_img": "WIN_20250218_09_46_13_Pro.jpg",
+      "hamming_distance": 0,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "WIN_20250218_09_46_11_Pro.jpg",
+      "db_img": "IMG_0652.jpg",
+      "hamming_distance": 131,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "WIN_20250218_09_46_11_Pro.jpg",
+      "db_img": "WIN_20250218_09_46_06_Pro.jpg",
+      "hamming_distance": 3,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "WIN_20250218_09_46_11_Pro.jpg",
+      "db_img": "IMG_0654.jpg",
+      "hamming_distance": 134,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "WIN_20250218_09_46_11_Pro.jpg",
+      "db_img": "WIN_20250218_09_46_08_Pro.jpg",
+      "hamming_distance": 1,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "WIN_20250218_09_46_11_Pro.jpg",
+      "db_img": "WIN_20250218_09_46_03_Pro.jpg",
+      "hamming_distance": 1,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "WIN_20250218_09_46_11_Pro.jpg",
+      "db_img": "IMG_0651.jpg",
+      "hamming_distance": 134,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "WIN_20250218_09_46_11_Pro.jpg",
+      "db_img": "WIN_20250218_09_46_11_Pro.jpg",
+      "hamming_distance": 0,
+      "is_same_user": true,
+      "is_same_image": true
+    },
+    {
+      "input_img": "WIN_20250218_09_46_11_Pro.jpg",
+      "db_img": "WIN_20250218_09_45_56_Pro.jpg",
+      "hamming_distance": 1,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "WIN_20250218_09_46_11_Pro.jpg",
+      "db_img": "WIN_20250218_09_45_59_Pro.jpg",
+      "hamming_distance": 1,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "WIN_20250218_09_46_11_Pro.jpg",
+      "db_img": "IMG_0653.jpg",
+      "hamming_distance": 137,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "WIN_20250218_09_46_11_Pro.jpg",
+      "db_img": "WIN_20250218_09_46_13_Pro.jpg",
+      "hamming_distance": 0,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "WIN_20250218_09_46_11_Pro.jpg",
+      "db_img": "IMG_0652.jpg",
+      "hamming_distance": 131,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "WIN_20250218_09_46_11_Pro.jpg",
+      "db_img": "WIN_20250218_09_46_06_Pro.jpg",
+      "hamming_distance": 3,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "WIN_20250218_09_45_56_Pro.jpg",
+      "db_img": "IMG_0654.jpg",
+      "hamming_distance": 133,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "WIN_20250218_09_45_56_Pro.jpg",
+      "db_img": "WIN_20250218_09_46_08_Pro.jpg",
+      "hamming_distance": 0,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "WIN_20250218_09_45_56_Pro.jpg",
+      "db_img": "WIN_20250218_09_46_03_Pro.jpg",
+      "hamming_distance": 2,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "WIN_20250218_09_45_56_Pro.jpg",
+      "db_img": "IMG_0651.jpg",
+      "hamming_distance": 133,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "WIN_20250218_09_45_56_Pro.jpg",
+      "db_img": "WIN_20250218_09_46_11_Pro.jpg",
+      "hamming_distance": 1,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "WIN_20250218_09_45_56_Pro.jpg",
+      "db_img": "WIN_20250218_09_45_56_Pro.jpg",
+      "hamming_distance": 0,
+      "is_same_user": true,
+      "is_same_image": true
+    },
+    {
+      "input_img": "WIN_20250218_09_45_56_Pro.jpg",
+      "db_img": "WIN_20250218_09_45_59_Pro.jpg",
+      "hamming_distance": 2,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "WIN_20250218_09_45_56_Pro.jpg",
+      "db_img": "IMG_0653.jpg",
+      "hamming_distance": 136,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "WIN_20250218_09_45_56_Pro.jpg",
+      "db_img": "WIN_20250218_09_46_13_Pro.jpg",
+      "hamming_distance": 1,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "WIN_20250218_09_45_56_Pro.jpg",
+      "db_img": "IMG_0652.jpg",
+      "hamming_distance": 130,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "WIN_20250218_09_45_56_Pro.jpg",
+      "db_img": "WIN_20250218_09_46_06_Pro.jpg",
+      "hamming_distance": 4,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "WIN_20250218_09_45_56_Pro.jpg",
+      "db_img": "IMG_0654.jpg",
+      "hamming_distance": 133,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "WIN_20250218_09_45_56_Pro.jpg",
+      "db_img": "WIN_20250218_09_46_08_Pro.jpg",
+      "hamming_distance": 0,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "WIN_20250218_09_45_56_Pro.jpg",
+      "db_img": "WIN_20250218_09_46_03_Pro.jpg",
+      "hamming_distance": 2,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "WIN_20250218_09_45_56_Pro.jpg",
+      "db_img": "IMG_0651.jpg",
+      "hamming_distance": 133,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "WIN_20250218_09_45_56_Pro.jpg",
+      "db_img": "WIN_20250218_09_46_11_Pro.jpg",
+      "hamming_distance": 1,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "WIN_20250218_09_45_56_Pro.jpg",
+      "db_img": "WIN_20250218_09_45_56_Pro.jpg",
+      "hamming_distance": 0,
+      "is_same_user": true,
+      "is_same_image": true
+    },
+    {
+      "input_img": "WIN_20250218_09_45_56_Pro.jpg",
+      "db_img": "WIN_20250218_09_45_59_Pro.jpg",
+      "hamming_distance": 2,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "WIN_20250218_09_45_56_Pro.jpg",
+      "db_img": "IMG_0653.jpg",
+      "hamming_distance": 136,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "WIN_20250218_09_45_56_Pro.jpg",
+      "db_img": "WIN_20250218_09_46_13_Pro.jpg",
+      "hamming_distance": 1,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "WIN_20250218_09_45_56_Pro.jpg",
+      "db_img": "IMG_0652.jpg",
+      "hamming_distance": 130,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "WIN_20250218_09_45_56_Pro.jpg",
+      "db_img": "WIN_20250218_09_46_06_Pro.jpg",
+      "hamming_distance": 4,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "WIN_20250218_09_45_59_Pro.jpg",
+      "db_img": "IMG_0654.jpg",
+      "hamming_distance": 135,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "WIN_20250218_09_45_59_Pro.jpg",
+      "db_img": "WIN_20250218_09_46_08_Pro.jpg",
+      "hamming_distance": 2,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "WIN_20250218_09_45_59_Pro.jpg",
+      "db_img": "WIN_20250218_09_46_03_Pro.jpg",
+      "hamming_distance": 0,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "WIN_20250218_09_45_59_Pro.jpg",
+      "db_img": "IMG_0651.jpg",
+      "hamming_distance": 133,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "WIN_20250218_09_45_59_Pro.jpg",
+      "db_img": "WIN_20250218_09_46_11_Pro.jpg",
+      "hamming_distance": 1,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "WIN_20250218_09_45_59_Pro.jpg",
+      "db_img": "WIN_20250218_09_45_56_Pro.jpg",
+      "hamming_distance": 2,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "WIN_20250218_09_45_59_Pro.jpg",
+      "db_img": "WIN_20250218_09_45_59_Pro.jpg",
+      "hamming_distance": 0,
+      "is_same_user": true,
+      "is_same_image": true
+    },
+    {
+      "input_img": "WIN_20250218_09_45_59_Pro.jpg",
+      "db_img": "IMG_0653.jpg",
+      "hamming_distance": 136,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "WIN_20250218_09_45_59_Pro.jpg",
+      "db_img": "WIN_20250218_09_46_13_Pro.jpg",
+      "hamming_distance": 1,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "WIN_20250218_09_45_59_Pro.jpg",
+      "db_img": "IMG_0652.jpg",
+      "hamming_distance": 130,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "WIN_20250218_09_45_59_Pro.jpg",
+      "db_img": "WIN_20250218_09_46_06_Pro.jpg",
+      "hamming_distance": 2,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "WIN_20250218_09_45_59_Pro.jpg",
+      "db_img": "IMG_0654.jpg",
+      "hamming_distance": 135,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "WIN_20250218_09_45_59_Pro.jpg",
+      "db_img": "WIN_20250218_09_46_08_Pro.jpg",
+      "hamming_distance": 2,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "WIN_20250218_09_45_59_Pro.jpg",
+      "db_img": "WIN_20250218_09_46_03_Pro.jpg",
+      "hamming_distance": 0,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "WIN_20250218_09_45_59_Pro.jpg",
+      "db_img": "IMG_0651.jpg",
+      "hamming_distance": 133,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "WIN_20250218_09_45_59_Pro.jpg",
+      "db_img": "WIN_20250218_09_46_11_Pro.jpg",
+      "hamming_distance": 1,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "WIN_20250218_09_45_59_Pro.jpg",
+      "db_img": "WIN_20250218_09_45_56_Pro.jpg",
+      "hamming_distance": 2,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "WIN_20250218_09_45_59_Pro.jpg",
+      "db_img": "WIN_20250218_09_45_59_Pro.jpg",
+      "hamming_distance": 0,
+      "is_same_user": true,
+      "is_same_image": true
+    },
+    {
+      "input_img": "WIN_20250218_09_45_59_Pro.jpg",
+      "db_img": "IMG_0653.jpg",
+      "hamming_distance": 136,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "WIN_20250218_09_45_59_Pro.jpg",
+      "db_img": "WIN_20250218_09_46_13_Pro.jpg",
+      "hamming_distance": 1,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "WIN_20250218_09_45_59_Pro.jpg",
+      "db_img": "IMG_0652.jpg",
+      "hamming_distance": 130,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "WIN_20250218_09_45_59_Pro.jpg",
+      "db_img": "WIN_20250218_09_46_06_Pro.jpg",
+      "hamming_distance": 2,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "WIN_20250218_09_46_13_Pro.jpg",
+      "db_img": "IMG_0654.jpg",
+      "hamming_distance": 134,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "WIN_20250218_09_46_13_Pro.jpg",
+      "db_img": "WIN_20250218_09_46_08_Pro.jpg",
+      "hamming_distance": 1,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "WIN_20250218_09_46_13_Pro.jpg",
+      "db_img": "WIN_20250218_09_46_03_Pro.jpg",
+      "hamming_distance": 1,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "WIN_20250218_09_46_13_Pro.jpg",
+      "db_img": "IMG_0651.jpg",
+      "hamming_distance": 134,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "WIN_20250218_09_46_13_Pro.jpg",
+      "db_img": "WIN_20250218_09_46_11_Pro.jpg",
+      "hamming_distance": 0,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "WIN_20250218_09_46_13_Pro.jpg",
+      "db_img": "WIN_20250218_09_45_56_Pro.jpg",
+      "hamming_distance": 1,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "WIN_20250218_09_46_13_Pro.jpg",
+      "db_img": "WIN_20250218_09_45_59_Pro.jpg",
+      "hamming_distance": 1,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "WIN_20250218_09_46_13_Pro.jpg",
+      "db_img": "IMG_0653.jpg",
+      "hamming_distance": 137,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "WIN_20250218_09_46_13_Pro.jpg",
+      "db_img": "WIN_20250218_09_46_13_Pro.jpg",
+      "hamming_distance": 0,
+      "is_same_user": true,
+      "is_same_image": true
+    },
+    {
+      "input_img": "WIN_20250218_09_46_13_Pro.jpg",
+      "db_img": "IMG_0652.jpg",
+      "hamming_distance": 131,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "WIN_20250218_09_46_13_Pro.jpg",
+      "db_img": "WIN_20250218_09_46_06_Pro.jpg",
+      "hamming_distance": 3,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "WIN_20250218_09_46_13_Pro.jpg",
+      "db_img": "IMG_0654.jpg",
+      "hamming_distance": 134,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "WIN_20250218_09_46_13_Pro.jpg",
+      "db_img": "WIN_20250218_09_46_08_Pro.jpg",
+      "hamming_distance": 1,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "WIN_20250218_09_46_13_Pro.jpg",
+      "db_img": "WIN_20250218_09_46_03_Pro.jpg",
+      "hamming_distance": 1,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "WIN_20250218_09_46_13_Pro.jpg",
+      "db_img": "IMG_0651.jpg",
+      "hamming_distance": 134,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "WIN_20250218_09_46_13_Pro.jpg",
+      "db_img": "WIN_20250218_09_46_11_Pro.jpg",
+      "hamming_distance": 0,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "WIN_20250218_09_46_13_Pro.jpg",
+      "db_img": "WIN_20250218_09_45_56_Pro.jpg",
+      "hamming_distance": 1,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "WIN_20250218_09_46_13_Pro.jpg",
+      "db_img": "WIN_20250218_09_45_59_Pro.jpg",
+      "hamming_distance": 1,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "WIN_20250218_09_46_13_Pro.jpg",
+      "db_img": "IMG_0653.jpg",
+      "hamming_distance": 137,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "WIN_20250218_09_46_13_Pro.jpg",
+      "db_img": "WIN_20250218_09_46_13_Pro.jpg",
+      "hamming_distance": 0,
+      "is_same_user": true,
+      "is_same_image": true
+    },
+    {
+      "input_img": "WIN_20250218_09_46_13_Pro.jpg",
+      "db_img": "IMG_0652.jpg",
+      "hamming_distance": 131,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "WIN_20250218_09_46_13_Pro.jpg",
+      "db_img": "WIN_20250218_09_46_06_Pro.jpg",
+      "hamming_distance": 3,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "IMG_0654.jpg",
+      "db_img": "IMG_0654.jpg",
+      "hamming_distance": 0,
+      "is_same_user": true,
+      "is_same_image": true
+    },
+    {
+      "input_img": "IMG_0654.jpg",
+      "db_img": "WIN_20250218_09_46_08_Pro.jpg",
+      "hamming_distance": 133,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "IMG_0654.jpg",
+      "db_img": "WIN_20250218_09_46_03_Pro.jpg",
+      "hamming_distance": 135,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "IMG_0654.jpg",
+      "db_img": "IMG_0651.jpg",
+      "hamming_distance": 38,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "IMG_0654.jpg",
+      "db_img": "WIN_20250218_09_46_11_Pro.jpg",
+      "hamming_distance": 134,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "IMG_0654.jpg",
+      "db_img": "WIN_20250218_09_45_56_Pro.jpg",
+      "hamming_distance": 133,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "IMG_0654.jpg",
+      "db_img": "WIN_20250218_09_45_59_Pro.jpg",
+      "hamming_distance": 135,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "IMG_0654.jpg",
+      "db_img": "IMG_0653.jpg",
+      "hamming_distance": 23,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "IMG_0654.jpg",
+      "db_img": "WIN_20250218_09_46_13_Pro.jpg",
+      "hamming_distance": 134,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "IMG_0654.jpg",
+      "db_img": "IMG_0652.jpg",
+      "hamming_distance": 35,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "IMG_0654.jpg",
+      "db_img": "WIN_20250218_09_46_06_Pro.jpg",
+      "hamming_distance": 135,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "IMG_0654.jpg",
+      "db_img": "IMG_0654.jpg",
+      "hamming_distance": 0,
+      "is_same_user": true,
+      "is_same_image": true
+    },
+    {
+      "input_img": "IMG_0654.jpg",
+      "db_img": "WIN_20250218_09_46_08_Pro.jpg",
+      "hamming_distance": 133,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "IMG_0654.jpg",
+      "db_img": "WIN_20250218_09_46_03_Pro.jpg",
+      "hamming_distance": 135,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "IMG_0654.jpg",
+      "db_img": "IMG_0651.jpg",
+      "hamming_distance": 38,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "IMG_0654.jpg",
+      "db_img": "WIN_20250218_09_46_11_Pro.jpg",
+      "hamming_distance": 134,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "IMG_0654.jpg",
+      "db_img": "WIN_20250218_09_45_56_Pro.jpg",
+      "hamming_distance": 133,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "IMG_0654.jpg",
+      "db_img": "WIN_20250218_09_45_59_Pro.jpg",
+      "hamming_distance": 135,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "IMG_0654.jpg",
+      "db_img": "IMG_0653.jpg",
+      "hamming_distance": 23,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "IMG_0654.jpg",
+      "db_img": "WIN_20250218_09_46_13_Pro.jpg",
+      "hamming_distance": 134,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "IMG_0654.jpg",
+      "db_img": "IMG_0652.jpg",
+      "hamming_distance": 35,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "IMG_0654.jpg",
+      "db_img": "WIN_20250218_09_46_06_Pro.jpg",
+      "hamming_distance": 135,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "IMG_0651.jpg",
+      "db_img": "IMG_0654.jpg",
+      "hamming_distance": 38,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "IMG_0651.jpg",
+      "db_img": "WIN_20250218_09_46_08_Pro.jpg",
+      "hamming_distance": 133,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "IMG_0651.jpg",
+      "db_img": "WIN_20250218_09_46_03_Pro.jpg",
+      "hamming_distance": 133,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "IMG_0651.jpg",
+      "db_img": "IMG_0651.jpg",
+      "hamming_distance": 0,
+      "is_same_user": true,
+      "is_same_image": true
+    },
+    {
+      "input_img": "IMG_0651.jpg",
+      "db_img": "WIN_20250218_09_46_11_Pro.jpg",
+      "hamming_distance": 134,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "IMG_0651.jpg",
+      "db_img": "WIN_20250218_09_45_56_Pro.jpg",
+      "hamming_distance": 133,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "IMG_0651.jpg",
+      "db_img": "WIN_20250218_09_45_59_Pro.jpg",
+      "hamming_distance": 133,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "IMG_0651.jpg",
+      "db_img": "IMG_0653.jpg",
+      "hamming_distance": 23,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "IMG_0651.jpg",
+      "db_img": "WIN_20250218_09_46_13_Pro.jpg",
+      "hamming_distance": 134,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "IMG_0651.jpg",
+      "db_img": "IMG_0652.jpg",
+      "hamming_distance": 21,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "IMG_0651.jpg",
+      "db_img": "WIN_20250218_09_46_06_Pro.jpg",
+      "hamming_distance": 133,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "IMG_0651.jpg",
+      "db_img": "IMG_0654.jpg",
+      "hamming_distance": 38,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "IMG_0651.jpg",
+      "db_img": "WIN_20250218_09_46_08_Pro.jpg",
+      "hamming_distance": 133,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "IMG_0651.jpg",
+      "db_img": "WIN_20250218_09_46_03_Pro.jpg",
+      "hamming_distance": 133,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "IMG_0651.jpg",
+      "db_img": "IMG_0651.jpg",
+      "hamming_distance": 0,
+      "is_same_user": true,
+      "is_same_image": true
+    },
+    {
+      "input_img": "IMG_0651.jpg",
+      "db_img": "WIN_20250218_09_46_11_Pro.jpg",
+      "hamming_distance": 134,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "IMG_0651.jpg",
+      "db_img": "WIN_20250218_09_45_56_Pro.jpg",
+      "hamming_distance": 133,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "IMG_0651.jpg",
+      "db_img": "WIN_20250218_09_45_59_Pro.jpg",
+      "hamming_distance": 133,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "IMG_0651.jpg",
+      "db_img": "IMG_0653.jpg",
+      "hamming_distance": 23,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "IMG_0651.jpg",
+      "db_img": "WIN_20250218_09_46_13_Pro.jpg",
+      "hamming_distance": 134,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "IMG_0651.jpg",
+      "db_img": "IMG_0652.jpg",
+      "hamming_distance": 21,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "IMG_0651.jpg",
+      "db_img": "WIN_20250218_09_46_06_Pro.jpg",
+      "hamming_distance": 133,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "IMG_0653.jpg",
+      "db_img": "IMG_0654.jpg",
+      "hamming_distance": 23,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "IMG_0653.jpg",
+      "db_img": "WIN_20250218_09_46_08_Pro.jpg",
+      "hamming_distance": 136,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "IMG_0653.jpg",
+      "db_img": "WIN_20250218_09_46_03_Pro.jpg",
+      "hamming_distance": 136,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "IMG_0653.jpg",
+      "db_img": "IMG_0651.jpg",
+      "hamming_distance": 23,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "IMG_0653.jpg",
+      "db_img": "WIN_20250218_09_46_11_Pro.jpg",
+      "hamming_distance": 137,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "IMG_0653.jpg",
+      "db_img": "WIN_20250218_09_45_56_Pro.jpg",
+      "hamming_distance": 136,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "IMG_0653.jpg",
+      "db_img": "WIN_20250218_09_45_59_Pro.jpg",
+      "hamming_distance": 136,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "IMG_0653.jpg",
+      "db_img": "IMG_0653.jpg",
+      "hamming_distance": 0,
+      "is_same_user": true,
+      "is_same_image": true
+    },
+    {
+      "input_img": "IMG_0653.jpg",
+      "db_img": "WIN_20250218_09_46_13_Pro.jpg",
+      "hamming_distance": 137,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "IMG_0653.jpg",
+      "db_img": "IMG_0652.jpg",
+      "hamming_distance": 16,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "IMG_0653.jpg",
+      "db_img": "WIN_20250218_09_46_06_Pro.jpg",
+      "hamming_distance": 136,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "IMG_0653.jpg",
+      "db_img": "IMG_0654.jpg",
+      "hamming_distance": 23,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "IMG_0653.jpg",
+      "db_img": "WIN_20250218_09_46_08_Pro.jpg",
+      "hamming_distance": 136,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "IMG_0653.jpg",
+      "db_img": "WIN_20250218_09_46_03_Pro.jpg",
+      "hamming_distance": 136,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "IMG_0653.jpg",
+      "db_img": "IMG_0651.jpg",
+      "hamming_distance": 23,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "IMG_0653.jpg",
+      "db_img": "WIN_20250218_09_46_11_Pro.jpg",
+      "hamming_distance": 137,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "IMG_0653.jpg",
+      "db_img": "WIN_20250218_09_45_56_Pro.jpg",
+      "hamming_distance": 136,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "IMG_0653.jpg",
+      "db_img": "WIN_20250218_09_45_59_Pro.jpg",
+      "hamming_distance": 136,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "IMG_0653.jpg",
+      "db_img": "IMG_0653.jpg",
+      "hamming_distance": 0,
+      "is_same_user": true,
+      "is_same_image": true
+    },
+    {
+      "input_img": "IMG_0653.jpg",
+      "db_img": "WIN_20250218_09_46_13_Pro.jpg",
+      "hamming_distance": 137,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "IMG_0653.jpg",
+      "db_img": "IMG_0652.jpg",
+      "hamming_distance": 16,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "IMG_0653.jpg",
+      "db_img": "WIN_20250218_09_46_06_Pro.jpg",
+      "hamming_distance": 136,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "IMG_0652.jpg",
+      "db_img": "IMG_0654.jpg",
+      "hamming_distance": 35,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "IMG_0652.jpg",
+      "db_img": "WIN_20250218_09_46_08_Pro.jpg",
+      "hamming_distance": 130,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "IMG_0652.jpg",
+      "db_img": "WIN_20250218_09_46_03_Pro.jpg",
+      "hamming_distance": 130,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "IMG_0652.jpg",
+      "db_img": "IMG_0651.jpg",
+      "hamming_distance": 21,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "IMG_0652.jpg",
+      "db_img": "WIN_20250218_09_46_11_Pro.jpg",
+      "hamming_distance": 131,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "IMG_0652.jpg",
+      "db_img": "WIN_20250218_09_45_56_Pro.jpg",
+      "hamming_distance": 130,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "IMG_0652.jpg",
+      "db_img": "WIN_20250218_09_45_59_Pro.jpg",
+      "hamming_distance": 130,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "IMG_0652.jpg",
+      "db_img": "IMG_0653.jpg",
+      "hamming_distance": 16,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "IMG_0652.jpg",
+      "db_img": "WIN_20250218_09_46_13_Pro.jpg",
+      "hamming_distance": 131,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "IMG_0652.jpg",
+      "db_img": "IMG_0652.jpg",
+      "hamming_distance": 0,
+      "is_same_user": true,
+      "is_same_image": true
+    },
+    {
+      "input_img": "IMG_0652.jpg",
+      "db_img": "WIN_20250218_09_46_06_Pro.jpg",
+      "hamming_distance": 132,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "IMG_0652.jpg",
+      "db_img": "IMG_0654.jpg",
+      "hamming_distance": 35,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "IMG_0652.jpg",
+      "db_img": "WIN_20250218_09_46_08_Pro.jpg",
+      "hamming_distance": 130,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "IMG_0652.jpg",
+      "db_img": "WIN_20250218_09_46_03_Pro.jpg",
+      "hamming_distance": 130,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "IMG_0652.jpg",
+      "db_img": "IMG_0651.jpg",
+      "hamming_distance": 21,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "IMG_0652.jpg",
+      "db_img": "WIN_20250218_09_46_11_Pro.jpg",
+      "hamming_distance": 131,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "IMG_0652.jpg",
+      "db_img": "WIN_20250218_09_45_56_Pro.jpg",
+      "hamming_distance": 130,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "IMG_0652.jpg",
+      "db_img": "WIN_20250218_09_45_59_Pro.jpg",
+      "hamming_distance": 130,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "IMG_0652.jpg",
+      "db_img": "IMG_0653.jpg",
+      "hamming_distance": 16,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "IMG_0652.jpg",
+      "db_img": "WIN_20250218_09_46_13_Pro.jpg",
+      "hamming_distance": 131,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "IMG_0652.jpg",
+      "db_img": "IMG_0652.jpg",
+      "hamming_distance": 0,
+      "is_same_user": true,
+      "is_same_image": true
+    },
+    {
+      "input_img": "IMG_0652.jpg",
+      "db_img": "WIN_20250218_09_46_06_Pro.jpg",
+      "hamming_distance": 132,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "WIN_20250218_09_46_06_Pro.jpg",
+      "db_img": "IMG_0654.jpg",
+      "hamming_distance": 135,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "WIN_20250218_09_46_06_Pro.jpg",
+      "db_img": "WIN_20250218_09_46_08_Pro.jpg",
+      "hamming_distance": 4,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "WIN_20250218_09_46_06_Pro.jpg",
+      "db_img": "WIN_20250218_09_46_03_Pro.jpg",
+      "hamming_distance": 2,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "WIN_20250218_09_46_06_Pro.jpg",
+      "db_img": "IMG_0651.jpg",
+      "hamming_distance": 133,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "WIN_20250218_09_46_06_Pro.jpg",
+      "db_img": "WIN_20250218_09_46_11_Pro.jpg",
+      "hamming_distance": 3,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "WIN_20250218_09_46_06_Pro.jpg",
+      "db_img": "WIN_20250218_09_45_56_Pro.jpg",
+      "hamming_distance": 4,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "WIN_20250218_09_46_06_Pro.jpg",
+      "db_img": "WIN_20250218_09_45_59_Pro.jpg",
+      "hamming_distance": 2,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "WIN_20250218_09_46_06_Pro.jpg",
+      "db_img": "IMG_0653.jpg",
+      "hamming_distance": 136,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "WIN_20250218_09_46_06_Pro.jpg",
+      "db_img": "WIN_20250218_09_46_13_Pro.jpg",
+      "hamming_distance": 3,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "WIN_20250218_09_46_06_Pro.jpg",
+      "db_img": "IMG_0652.jpg",
+      "hamming_distance": 132,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "WIN_20250218_09_46_06_Pro.jpg",
+      "db_img": "WIN_20250218_09_46_06_Pro.jpg",
+      "hamming_distance": 0,
+      "is_same_user": true,
+      "is_same_image": true
+    },
+    {
+      "input_img": "WIN_20250218_09_46_06_Pro.jpg",
+      "db_img": "IMG_0654.jpg",
+      "hamming_distance": 135,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "WIN_20250218_09_46_06_Pro.jpg",
+      "db_img": "WIN_20250218_09_46_08_Pro.jpg",
+      "hamming_distance": 4,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "WIN_20250218_09_46_06_Pro.jpg",
+      "db_img": "WIN_20250218_09_46_03_Pro.jpg",
+      "hamming_distance": 2,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "WIN_20250218_09_46_06_Pro.jpg",
+      "db_img": "IMG_0651.jpg",
+      "hamming_distance": 133,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "WIN_20250218_09_46_06_Pro.jpg",
+      "db_img": "WIN_20250218_09_46_11_Pro.jpg",
+      "hamming_distance": 3,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "WIN_20250218_09_46_06_Pro.jpg",
+      "db_img": "WIN_20250218_09_45_56_Pro.jpg",
+      "hamming_distance": 4,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "WIN_20250218_09_46_06_Pro.jpg",
+      "db_img": "WIN_20250218_09_45_59_Pro.jpg",
+      "hamming_distance": 2,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "WIN_20250218_09_46_06_Pro.jpg",
+      "db_img": "IMG_0653.jpg",
+      "hamming_distance": 136,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "WIN_20250218_09_46_06_Pro.jpg",
+      "db_img": "WIN_20250218_09_46_13_Pro.jpg",
+      "hamming_distance": 3,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "WIN_20250218_09_46_06_Pro.jpg",
+      "db_img": "IMG_0652.jpg",
+      "hamming_distance": 132,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "WIN_20250218_09_46_06_Pro.jpg",
+      "db_img": "WIN_20250218_09_46_06_Pro.jpg",
+      "hamming_distance": 0,
+      "is_same_user": true,
+      "is_same_image": true
+    },
+    {
+      "input_img": "IMG_0654.jpg",
+      "db_img": "IMG_0654.jpg",
+      "hamming_distance": 46,
+      "is_same_user": true,
+      "is_same_image": true
+    },
+    {
+      "input_img": "IMG_0654.jpg",
+      "db_img": "WIN_20250218_09_46_08_Pro.jpg",
+      "hamming_distance": 125,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "IMG_0654.jpg",
+      "db_img": "WIN_20250218_09_46_03_Pro.jpg",
+      "hamming_distance": 125,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "IMG_0654.jpg",
+      "db_img": "IMG_0651.jpg",
+      "hamming_distance": 44,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "IMG_0654.jpg",
+      "db_img": "WIN_20250218_09_46_11_Pro.jpg",
+      "hamming_distance": 124,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "IMG_0654.jpg",
+      "db_img": "WIN_20250218_09_45_56_Pro.jpg",
+      "hamming_distance": 125,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "IMG_0654.jpg",
+      "db_img": "WIN_20250218_09_45_59_Pro.jpg",
+      "hamming_distance": 125,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "IMG_0654.jpg",
+      "db_img": "IMG_0653.jpg",
+      "hamming_distance": 43,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "IMG_0654.jpg",
+      "db_img": "WIN_20250218_09_46_13_Pro.jpg",
+      "hamming_distance": 124,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "IMG_0654.jpg",
+      "db_img": "IMG_0652.jpg",
+      "hamming_distance": 49,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "IMG_0654.jpg",
+      "db_img": "WIN_20250218_09_46_06_Pro.jpg",
+      "hamming_distance": 125,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "IMG_0654.jpg",
+      "db_img": "IMG_0654.jpg",
+      "hamming_distance": 46,
+      "is_same_user": true,
+      "is_same_image": true
+    },
+    {
+      "input_img": "IMG_0654.jpg",
+      "db_img": "WIN_20250218_09_46_08_Pro.jpg",
+      "hamming_distance": 125,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "IMG_0654.jpg",
+      "db_img": "WIN_20250218_09_46_03_Pro.jpg",
+      "hamming_distance": 125,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "IMG_0654.jpg",
+      "db_img": "IMG_0651.jpg",
+      "hamming_distance": 44,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "IMG_0654.jpg",
+      "db_img": "WIN_20250218_09_46_11_Pro.jpg",
+      "hamming_distance": 124,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "IMG_0654.jpg",
+      "db_img": "WIN_20250218_09_45_56_Pro.jpg",
+      "hamming_distance": 125,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "IMG_0654.jpg",
+      "db_img": "WIN_20250218_09_45_59_Pro.jpg",
+      "hamming_distance": 125,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "IMG_0654.jpg",
+      "db_img": "IMG_0653.jpg",
+      "hamming_distance": 43,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "IMG_0654.jpg",
+      "db_img": "WIN_20250218_09_46_13_Pro.jpg",
+      "hamming_distance": 124,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "IMG_0654.jpg",
+      "db_img": "IMG_0652.jpg",
+      "hamming_distance": 49,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "IMG_0654.jpg",
+      "db_img": "WIN_20250218_09_46_06_Pro.jpg",
+      "hamming_distance": 125,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "IMG_0651.jpg",
+      "db_img": "IMG_0654.jpg",
+      "hamming_distance": 44,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "IMG_0651.jpg",
+      "db_img": "WIN_20250218_09_46_08_Pro.jpg",
+      "hamming_distance": 135,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "IMG_0651.jpg",
+      "db_img": "WIN_20250218_09_46_03_Pro.jpg",
+      "hamming_distance": 135,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "IMG_0651.jpg",
+      "db_img": "IMG_0651.jpg",
+      "hamming_distance": 38,
+      "is_same_user": true,
+      "is_same_image": true
+    },
+    {
+      "input_img": "IMG_0651.jpg",
+      "db_img": "WIN_20250218_09_46_11_Pro.jpg",
+      "hamming_distance": 136,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "IMG_0651.jpg",
+      "db_img": "WIN_20250218_09_45_56_Pro.jpg",
+      "hamming_distance": 135,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "IMG_0651.jpg",
+      "db_img": "WIN_20250218_09_45_59_Pro.jpg",
+      "hamming_distance": 135,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "IMG_0651.jpg",
+      "db_img": "IMG_0653.jpg",
+      "hamming_distance": 35,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "IMG_0651.jpg",
+      "db_img": "WIN_20250218_09_46_13_Pro.jpg",
+      "hamming_distance": 136,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "IMG_0651.jpg",
+      "db_img": "IMG_0652.jpg",
+      "hamming_distance": 41,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "IMG_0651.jpg",
+      "db_img": "WIN_20250218_09_46_06_Pro.jpg",
+      "hamming_distance": 135,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "IMG_0651.jpg",
+      "db_img": "IMG_0654.jpg",
+      "hamming_distance": 44,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "IMG_0651.jpg",
+      "db_img": "WIN_20250218_09_46_08_Pro.jpg",
+      "hamming_distance": 135,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "IMG_0651.jpg",
+      "db_img": "WIN_20250218_09_46_03_Pro.jpg",
+      "hamming_distance": 135,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "IMG_0651.jpg",
+      "db_img": "IMG_0651.jpg",
+      "hamming_distance": 38,
+      "is_same_user": true,
+      "is_same_image": true
+    },
+    {
+      "input_img": "IMG_0651.jpg",
+      "db_img": "WIN_20250218_09_46_11_Pro.jpg",
+      "hamming_distance": 136,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "IMG_0651.jpg",
+      "db_img": "WIN_20250218_09_45_56_Pro.jpg",
+      "hamming_distance": 135,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "IMG_0651.jpg",
+      "db_img": "WIN_20250218_09_45_59_Pro.jpg",
+      "hamming_distance": 135,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "IMG_0651.jpg",
+      "db_img": "IMG_0653.jpg",
+      "hamming_distance": 35,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "IMG_0651.jpg",
+      "db_img": "WIN_20250218_09_46_13_Pro.jpg",
+      "hamming_distance": 136,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "IMG_0651.jpg",
+      "db_img": "IMG_0652.jpg",
+      "hamming_distance": 41,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "IMG_0651.jpg",
+      "db_img": "WIN_20250218_09_46_06_Pro.jpg",
+      "hamming_distance": 135,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "IMG_0653.jpg",
+      "db_img": "IMG_0654.jpg",
+      "hamming_distance": 43,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "IMG_0653.jpg",
+      "db_img": "WIN_20250218_09_46_08_Pro.jpg",
+      "hamming_distance": 128,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "IMG_0653.jpg",
+      "db_img": "WIN_20250218_09_46_03_Pro.jpg",
+      "hamming_distance": 128,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "IMG_0653.jpg",
+      "db_img": "IMG_0651.jpg",
+      "hamming_distance": 35,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "IMG_0653.jpg",
+      "db_img": "WIN_20250218_09_46_11_Pro.jpg",
+      "hamming_distance": 127,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "IMG_0653.jpg",
+      "db_img": "WIN_20250218_09_45_56_Pro.jpg",
+      "hamming_distance": 128,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "IMG_0653.jpg",
+      "db_img": "WIN_20250218_09_45_59_Pro.jpg",
+      "hamming_distance": 128,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "IMG_0653.jpg",
+      "db_img": "IMG_0653.jpg",
+      "hamming_distance": 40,
+      "is_same_user": true,
+      "is_same_image": true
+    },
+    {
+      "input_img": "IMG_0653.jpg",
+      "db_img": "WIN_20250218_09_46_13_Pro.jpg",
+      "hamming_distance": 127,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "IMG_0653.jpg",
+      "db_img": "IMG_0652.jpg",
+      "hamming_distance": 42,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "IMG_0653.jpg",
+      "db_img": "WIN_20250218_09_46_06_Pro.jpg",
+      "hamming_distance": 128,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "IMG_0653.jpg",
+      "db_img": "IMG_0654.jpg",
+      "hamming_distance": 43,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "IMG_0653.jpg",
+      "db_img": "WIN_20250218_09_46_08_Pro.jpg",
+      "hamming_distance": 128,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "IMG_0653.jpg",
+      "db_img": "WIN_20250218_09_46_03_Pro.jpg",
+      "hamming_distance": 128,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "IMG_0653.jpg",
+      "db_img": "IMG_0651.jpg",
+      "hamming_distance": 35,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "IMG_0653.jpg",
+      "db_img": "WIN_20250218_09_46_11_Pro.jpg",
+      "hamming_distance": 127,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "IMG_0653.jpg",
+      "db_img": "WIN_20250218_09_45_56_Pro.jpg",
+      "hamming_distance": 128,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "IMG_0653.jpg",
+      "db_img": "WIN_20250218_09_45_59_Pro.jpg",
+      "hamming_distance": 128,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "IMG_0653.jpg",
+      "db_img": "IMG_0653.jpg",
+      "hamming_distance": 40,
+      "is_same_user": true,
+      "is_same_image": true
+    },
+    {
+      "input_img": "IMG_0653.jpg",
+      "db_img": "WIN_20250218_09_46_13_Pro.jpg",
+      "hamming_distance": 127,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "IMG_0653.jpg",
+      "db_img": "IMG_0652.jpg",
+      "hamming_distance": 42,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "IMG_0653.jpg",
+      "db_img": "WIN_20250218_09_46_06_Pro.jpg",
+      "hamming_distance": 128,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "IMG_0652.jpg",
+      "db_img": "IMG_0654.jpg",
+      "hamming_distance": 49,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "IMG_0652.jpg",
+      "db_img": "WIN_20250218_09_46_08_Pro.jpg",
+      "hamming_distance": 128,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "IMG_0652.jpg",
+      "db_img": "WIN_20250218_09_46_03_Pro.jpg",
+      "hamming_distance": 128,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "IMG_0652.jpg",
+      "db_img": "IMG_0651.jpg",
+      "hamming_distance": 41,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "IMG_0652.jpg",
+      "db_img": "WIN_20250218_09_46_11_Pro.jpg",
+      "hamming_distance": 127,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "IMG_0652.jpg",
+      "db_img": "WIN_20250218_09_45_56_Pro.jpg",
+      "hamming_distance": 128,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "IMG_0652.jpg",
+      "db_img": "WIN_20250218_09_45_59_Pro.jpg",
+      "hamming_distance": 128,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "IMG_0652.jpg",
+      "db_img": "IMG_0653.jpg",
+      "hamming_distance": 42,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "IMG_0652.jpg",
+      "db_img": "WIN_20250218_09_46_13_Pro.jpg",
+      "hamming_distance": 127,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "IMG_0652.jpg",
+      "db_img": "IMG_0652.jpg",
+      "hamming_distance": 36,
+      "is_same_user": true,
+      "is_same_image": true
+    },
+    {
+      "input_img": "IMG_0652.jpg",
+      "db_img": "WIN_20250218_09_46_06_Pro.jpg",
+      "hamming_distance": 128,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "IMG_0652.jpg",
+      "db_img": "IMG_0654.jpg",
+      "hamming_distance": 49,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "IMG_0652.jpg",
+      "db_img": "WIN_20250218_09_46_08_Pro.jpg",
+      "hamming_distance": 128,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "IMG_0652.jpg",
+      "db_img": "WIN_20250218_09_46_03_Pro.jpg",
+      "hamming_distance": 128,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "IMG_0652.jpg",
+      "db_img": "IMG_0651.jpg",
+      "hamming_distance": 41,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "IMG_0652.jpg",
+      "db_img": "WIN_20250218_09_46_11_Pro.jpg",
+      "hamming_distance": 127,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "IMG_0652.jpg",
+      "db_img": "WIN_20250218_09_45_56_Pro.jpg",
+      "hamming_distance": 128,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "IMG_0652.jpg",
+      "db_img": "WIN_20250218_09_45_59_Pro.jpg",
+      "hamming_distance": 128,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "IMG_0652.jpg",
+      "db_img": "IMG_0653.jpg",
+      "hamming_distance": 42,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "IMG_0652.jpg",
+      "db_img": "WIN_20250218_09_46_13_Pro.jpg",
+      "hamming_distance": 127,
+      "is_same_user": true,
+      "is_same_image": false
+    },
+    {
+      "input_img": "IMG_0652.jpg",
+      "db_img": "IMG_0652.jpg",
+      "hamming_distance": 36,
+      "is_same_user": true,
+      "is_same_image": true
+    },
+    {
+      "input_img": "IMG_0652.jpg",
+      "db_img": "WIN_20250218_09_46_06_Pro.jpg",
+      "hamming_distance": 128,
+      "is_same_user": true,
+      "is_same_image": false
+    }
+  ]
+}
