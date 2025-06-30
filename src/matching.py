@@ -9,7 +9,7 @@ class MatchResult:
         self,
         input_img: str,
         db_img: str,
-        hamming_distance: Optional[int] = None,
+        hamming_distance: Optional[float] = None,
         is_same_user: Optional[bool] = None,
         is_same_image: Optional[bool] = None,
     ) -> None:
@@ -19,7 +19,7 @@ class MatchResult:
         self._is_same_user = is_same_user
         self._is_same_image = is_same_image
 
-    def set_hamming_distance(self, hamming_distance: int):
+    def set_hamming_distance(self, hamming_distance: float):
         self._hamming_distance = hamming_distance
         return self
 
@@ -90,14 +90,15 @@ class MatchingProcess:
     def _hamming_distance(self, b_str1: str, b_str2: str):
         if len(b_str1) != len(b_str2):
             raise ValueError(
-                "_hamming_distances did not get two equal length bitstrings"
+                "_hamming_distance did not get two equal length bitstrings"
             )
 
         diff = int(b_str1, 2) ^ int(b_str2, 2)
         diff_b = format(diff, "04b")
         h_dist = diff_b.count("1")
+        h_adj = h_dist / len(b_str1)
 
-        return h_dist
+        return h_adj
 
     def save_results(self):
         db = Db(f"matches-{self.image_hash.method}")
