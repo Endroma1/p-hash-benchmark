@@ -9,6 +9,7 @@ from pickle_img import PickleableImage
 from modify_image import Base, Flip, ModImage, ModImageBuilder, Modification
 from matching import MatchingProcess, MatchResult
 from multiprocessing import Event, Process, Queue, Pool, current_process
+from result_calc import Roc
 import logging
 import argparse
 
@@ -115,11 +116,17 @@ class Benchmark:
             p.join()
 
         logging.info("hashed all images")
+        result: list[MatchResult] = []
         while not q_hashes.empty():
             hash = q_hashes.get()
             if isinstance(hash, StopSignal):
                 return None
-            MatchingProcess(hash).save_results()
+            match_result = MatchingProcess(hash)
+            match_result.save_results()
+            result.extend(match_result.match_results)
+
+        print("Calculating roc")
+        Roc(result, self.method)
 
     def _open_imgs(self, paths: "Queue[Path | StopSignal]", imgs: "Queue"):
         while True:

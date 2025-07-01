@@ -19,6 +19,16 @@ class MatchResult:
         self._is_same_user = is_same_user
         self._is_same_image = is_same_image
 
+    @property
+    def is_same_image(self) -> bool:
+        assert self._is_same_image is not None
+        return self._is_same_image
+
+    @property
+    def hamming_distance(self) -> float:
+        assert self._hamming_distance is not None
+        return self._hamming_distance
+
     def set_hamming_distance(self, hamming_distance: float):
         self._hamming_distance = hamming_distance
         return self
@@ -57,8 +67,12 @@ class MatchingProcess:
     def __init__(self, image_hash: ImageHash) -> None:
         self.image_hash = image_hash
         self.db_hashes = ImageHash.load_all_hashes_from_db(image_hash.method)
-        self.match_results: list["MatchResult"] = []
+        self._match_results: list["MatchResult"] = []
         self.start()
+
+    @property
+    def match_results(self) -> list["MatchResult"]:
+        return self._match_results
 
     def start(self):
         for img_hash in self.db_hashes:
@@ -84,7 +98,7 @@ class MatchingProcess:
 
             result.set_hamming_distance(h_dist)
 
-            self.match_results.append(result)
+            self._match_results.append(result)
 
     def _hamming_distance(self, b_str1: str, b_str2: str):
         if len(b_str1) != len(b_str2):
@@ -101,5 +115,5 @@ class MatchingProcess:
 
     def save_results(self):
         db = Db(f"matches-{self.image_hash.method}")
-        for result in self.match_results:
+        for result in self._match_results:
             result.save_to_db(db)
