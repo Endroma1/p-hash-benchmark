@@ -67,14 +67,14 @@ class MatchingProcess:
     def __init__(self, image_hash: ImageHash) -> None:
         self.image_hash = image_hash
         self.db_hashes = ImageHash.load_all_hashes_from_db(image_hash.method)
-        self._match_results: list["MatchResult"] = []
-        self.start()
+        self._match_results: list["MatchResult"] = self.start()
 
     @property
     def match_results(self) -> list["MatchResult"]:
         return self._match_results
 
     def start(self):
+        results = []
         for img_hash in self.db_hashes:
             result = MatchResult(self.image_hash.name, img_hash.name)
 
@@ -98,9 +98,11 @@ class MatchingProcess:
 
             result.set_hamming_distance(h_dist)
 
-            self._match_results.append(result)
+            results.append(result)
 
-    def _hamming_distance(self, b_str1: str, b_str2: str):
+        return results
+
+    def _hamming_distance(self, b_str1: str, b_str2: str) -> float:
         if len(b_str1) != len(b_str2):
             raise ValueError(
                 "_hamming_distance did not get two equal length bitstrings"

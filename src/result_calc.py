@@ -1,4 +1,5 @@
 from abc import ABC
+from typing import Optional
 
 from matching import MatchResult
 from sklearn.metrics import roc_curve, auc
@@ -17,9 +18,9 @@ class Roc(ResultMethod):
     def __init__(self, match_results: list[MatchResult], method_name: str) -> None:
         super().__init__(match_results)
 
-        (self.fpr, self.tpr, self.thresholds) = self.fpr_tpr_calc()
+        (fpr, tpr, thresholds) = self.fpr_tpr_calc()
 
-        self.plot_roc(method_name)
+        self.plot_roc(method_name, fpr, tpr, f"AUC{self.auc(fpr, tpr)}")
 
     def fpr_tpr_calc(self):
         y_true = [int(match.is_same_image) for match in self.matches]
@@ -29,12 +30,12 @@ class Roc(ResultMethod):
 
         return (fpr, tpr, thresholds)
 
-    def auc(self) -> float:
-        return auc(self.fpr, self.tpr)
+    def auc(self, fpr, tpr) -> float:
+        return auc(fpr, tpr)
 
-    def plot_roc(self, method_name: str):
+    def plot_roc(self, method_name: str, x, y, desc: Optional[str] = None):
         plt.figure(figsize=(6, 6))
-        plt.plot(self.fpr, self.tpr, color="blue", lw=2, label=f"AUC = {self.auc()}")
+        plt.plot(x, y, color="blue", lw=2, label={desc})
         plt.plot([0, 1], [0, 1], linestyle="--", color="gray")
 
         plt.xlabel("False Positive Rate")
