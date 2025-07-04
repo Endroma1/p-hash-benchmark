@@ -1,4 +1,5 @@
 import logging
+from registries import HashMethods
 from db import Db
 from typing import Optional
 from PIL import Image
@@ -9,19 +10,17 @@ from pathlib import Path
 
 
 class HashMethod(ABC):
+    _name: str = ""
     def __init__(
         self,
-        name: Optional[str] = None,
         img_path: Optional[Path] = None,
         img: Optional[Image.Image] = None,
         hash_len: int = 16,
     ) -> None:
-        if name is None:
+        if self._name is None:
             raise ValueError(
                 "Name for hashing method is not given. Set this in the method constructor"
             )
-
-        self._name = name
 
         if img_path == img:
             raise ValueError("HashMethod cannot take both img_path and img. Only one")
@@ -53,7 +52,7 @@ class ImageHash:
     def __init__(
         self,
         hash: str,
-        method_name,
+        method_name: str,
         img_path: Optional[Path] = None,
         img_name: Optional[str] = None,
     ) -> None:
@@ -88,6 +87,8 @@ class ImageHash:
         binary = bin(num)
         no_prefix = binary[2:]
         return no_prefix
+
+    def hashing_methods(self) -> list[str]:
 
     def user(self) -> Optional[User]:
         """Returns the user that owns the hashed image"""
@@ -184,15 +185,16 @@ class HashJobBuilder:
 
         return ImageHash(obj.hash(), obj.name, img_path=self.img_path)
 
-
+@HashMethods.register
 class AverageHash(HashMethod):
+    _name = "median_hash"
     def __init__(
         self,
         img_path: Optional[Path] = None,
         img: Optional[Image.Image] = None,
         hash_len: int = 16,
     ) -> None:
-        super().__init__("average_hash", img_path, img, hash_len)
+        super().__init__( img_path, img, hash_len)
 
     def hash(self) -> str:
         grayscale = self.img.convert("L")
@@ -212,15 +214,16 @@ class AverageHash(HashMethod):
 
         return hex_result
 
-
+@HashMethods.register
 class MedianHash(HashMethod):
+    _name = "median_hash"
     def __init__(
         self,
         img_path: Optional[Path] = None,
         img: Optional[Image.Image] = None,
         hash_len: int = 16,
     ) -> None:
-        super().__init__("median_hash", img_path, img, hash_len)
+        super().__init__( img_path, img, hash_len)
 
     def hash(self) -> str:
         grayscale = self.img.convert("L")

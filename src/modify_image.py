@@ -13,14 +13,18 @@ TMP_FOLDER = Path.cwd() / "modified_imgs"
 
 class Modification(ABC):
     def __init__(self, name: str) -> None:
-        self.mod_name = name
+        self._name = name
 
     @abstractmethod
     def modify(self, img: Image.Image, **kwargs) -> Image.Image:
         pass
 
     def __str__(self) -> str:
-        return self.mod_name
+        return self._name
+
+    @property
+    def name(self) -> str:
+        return self._name
 
 
 class Flip(Modification):
@@ -64,13 +68,13 @@ class ModImage:
             return None
 
     @classmethod
-    def modify_image(
+    def new(
         cls, img: Image.Image, mod: Modification, save_dir: Path = TMP_FOLDER
     ) -> Optional["ModImage"]:
         """Returns the ModifyImage object after saving for later caching"""
 
         save_path: Path = (
-            save_dir / str(mod) / f"{str(PilSha256.crypto_hash(img)) + ".png"}"
+            save_dir / str(mod) / f"{str(PilSha256.crypto_hash(img)) + '.png'}"
         )
 
         if save_path.exists():
@@ -88,7 +92,7 @@ class ModImageBuilder:
     def __init__(
         self,
         img: Image.Image,
-        mod: Optional[Modification] = None,
+        mod: Optional[Modification] = Base(),
         mods: Optional[list[Modification]] = None,
         save_dir: Path = TMP_FOLDER,
         queue: Optional[Queue] = None,
@@ -143,7 +147,7 @@ class ModImageBuilder:
             )
 
         if self.mod is not None:
-            mod_img = ModImage.modify_image(self.img, self.mod, self.save_dir)
+            mod_img = ModImage.new(self.img, self.mod, self.save_dir)
             if self.return_img:
                 return mod_img.modified_image
             return mod_img
@@ -151,7 +155,7 @@ class ModImageBuilder:
         elif self.mods is not None and self.queue is None:
             mod_imgs = []
             for mod in self.mods:
-                mod_img = ModImage.modify_image(self.img, mod, self.save_dir)
+                mod_img = ModImage.new(self.img, mod, self.save_dir)
                 if self.return_img:
                     mod_imgs.append(mod_img.modified_image)
                 mod_imgs.append(mod_img)
@@ -160,7 +164,7 @@ class ModImageBuilder:
 
         elif self.mods and self.queue is not None:
             for mod in self.mods:
-                mod_img = ModImage.modify_image(self.img, mod, self.save_dir)
+                mod_img = ModImage.new(self.img, mod, self.save_dir)
                 img = mod_img.modified_image
                 if self.pickleable_img:
                     img = PickleableImage.from_pil_image(img, self.path)
@@ -171,3 +175,6 @@ class ModImageBuilder:
 
         else:
             raise ValueError("No mod or mods parameter were given")
+
+
+MODIFIERS = [Flip(), Base()]
