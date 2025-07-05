@@ -5,6 +5,7 @@ from pathlib import Path
 from hash_methods import AverageHash
 from registries import Modifications, HashMethods
 from rich import print
+from config import ConfigInterface, DEFAULT_TOML_FILE
 
 
 TEST_IMG = Path("./gruppen_test_bilder/IMG_0651.jpg")
@@ -19,6 +20,9 @@ def main():
     if args.get_methods:
         print(HashMethods())
         print(Modifications())
+
+    if args.generate_config:
+        ConfigInterface.create_default()
 
     if args.create_user is not None:
         if args.file and args.dir is None:  # If no files are specified
@@ -46,11 +50,11 @@ def main():
             DbGen(args.dir, TEST_HASHING_METHOD).dbgen()
 
     if args.benchmark:
-        paths = [p for p in TEST_IMG_FOLDER.rglob("*") if p.is_file()]
         logging.debug(f"Using images in dir {TEST_IMG_FOLDER}")
-        BenchmarkBuilder(paths).set_img_openers(2).set_img_hashers(4).set_img_modifiers(
-            4
-        ).run()
+        config = ConfigInterface.read_file().config
+        print(config)
+
+        BenchmarkBuilder().use_config(config)
 
 
 if __name__ == "__main__":

@@ -28,8 +28,7 @@ class HashMethod(ABC):
 
     def __init__(
         self,
-        img_path: Optional[Path] = None,
-        img: Optional[Image.Image] = None,
+        img: Image.Image,
         hash_len: int = 16,
     ) -> None:
         if self._name is None:
@@ -37,18 +36,7 @@ class HashMethod(ABC):
                 "Name for hashing method is not given. Set this in the method constructor"
             )
 
-        if img_path == img:
-            raise ValueError("HashMethod cannot take both img_path and img. Only one")
-
-        if img_path is not None:
-            self.img = Image.open(img_path)
-
-        elif img is not None:
-            self.img = img
-
-        else:
-            raise ValueError("No image given to HashMethod")
-
+        self.img = img
         self.hash_len = hash_len
 
     @abstractmethod

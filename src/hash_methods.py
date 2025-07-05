@@ -1,5 +1,3 @@
-from typing import Optional
-from pathlib import Path
 from PIL import Image
 import numpy as np
 
@@ -13,11 +11,10 @@ class AverageHash(HashMethod):
 
     def __init__(
         self,
-        img_path: Optional[Path] = None,
-        img: Optional[Image.Image] = None,
+        img: Image.Image,
         hash_len: int = 16,
     ) -> None:
-        super().__init__(img_path, img, hash_len)
+        super().__init__(img, hash_len)
 
     def hash(self) -> str:
         grayscale = self.img.convert("L")
@@ -44,11 +41,10 @@ class MedianHash(HashMethod):
 
     def __init__(
         self,
-        img_path: Optional[Path] = None,
-        img: Optional[Image.Image] = None,
+        img: Image.Image,
         hash_len: int = 16,
     ) -> None:
-        super().__init__(img_path, img, hash_len)
+        super().__init__(img, hash_len)
 
     def hash(self) -> str:
         grayscale = self.img.convert("L")

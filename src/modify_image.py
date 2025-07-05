@@ -38,7 +38,7 @@ class ModImage:
 
     @classmethod
     def new(
-        cls, img: Image.Image, mod: Modification, save_dir: Path = TMP_FOLDER
+        cls, img: Image.Image, mod: type[Modification], save_dir: Path = TMP_FOLDER
     ) -> Optional["ModImage"]:
         """Returns the ModifyImage object after saving for later caching"""
 
@@ -50,7 +50,7 @@ class ModImage:
             logging.debug(f"Found image {save_path}")
             return ModImage(Image.open(save_path))
 
-        mod_img = ModImage(mod.modify(img))
+        mod_img = ModImage(mod().modify(img))
 
         mod_img.save(save_path)
 
@@ -61,8 +61,8 @@ class ModImageBuilder:
     def __init__(
         self,
         img: Image.Image,
-        mod: Optional[Modification] = Base(),
-        mods: Optional[list[Modification]] = None,
+        mod: Optional[type[Modification]] = Base,
+        mods: Optional[list[type[Modification]]] = None,
         save_dir: Path = TMP_FOLDER,
         queue: Optional[Queue] = None,
         return_img: bool = True,
@@ -81,11 +81,11 @@ class ModImageBuilder:
         self.img = path
         return self
 
-    def set_mod(self, mod: Modification):
+    def set_mod(self, mod: type[Modification]):
         self.mod = mod
         return self
 
-    def set_mods(self, mods: list[Modification]):
+    def set_mods(self, mods: list[type[Modification]]):
         self.mods = mods
         return self
 

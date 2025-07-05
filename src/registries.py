@@ -2,7 +2,7 @@
 Register all methods for hashing, modification and result calc objects in dictionaries.
 """
 
-from typing import Generic, TypeVar
+from typing import Generic, Optional, TypeVar
 
 from rich.console import RenderableType
 from rich.text import Text
@@ -14,6 +14,7 @@ T = TypeVar("T")
 class Registry(Generic[T]):
     _type: str = ""
     _registry: dict[str, type[T]] = {}
+    _reverse_registry: dict[type[T], str] = {}
 
     @classmethod
     def register(cls, method_cls: type[T]) -> type[T]:
@@ -32,9 +33,11 @@ class Registry(Generic[T]):
             )
 
         if not cls._type:
-            cls._type = method_cls.__bases__[0].__name__  # Could be bug prone
+            cls._type = method_cls.__bases__[0].__name__
+            # Could be bug prone. Just don't use inheritance.
 
         cls._registry[name] = method_cls
+        cls._reverse_registry[method_cls] = name
 
         return method_cls
 
@@ -43,6 +46,20 @@ class Registry(Generic[T]):
 
     def get_names(self) -> list[str]:
         return list(self._registry.keys())
+
+    def to_obj(self, method_name: str) -> type[T]:
+        obj = self._registry.get(method_name)
+        if obj is None:
+            raise ValueError(f"Could not find method {method_name}. Does it exist?")
+
+        return obj
+
+    def to_str(self, obj: type[T]) -> str:
+        name = self._reverse_registry.get(obj)
+        if name is None:
+            raise ValueError(f"Could not find method {obj.__name__}. Does it exist?")
+
+        return name
 
     def __str__(self) -> str:
         if not self._registry:

@@ -12,8 +12,10 @@ from modify_methods import Flip
 from matching import MatchingProcess, MatchResult
 from multiprocessing import Event, Process, Queue, Pool, current_process
 from result_calc import Roc
+from config import BenchmarkConfig
 import logging
 import argparse
+from config import DEFAULT_TOML_FILE
 
 
 logging.basicConfig(filename="app.log", level=logging.DEBUG, filemode="w")
@@ -44,6 +46,11 @@ class Config:
         self.parser.add_argument(
             "--get-methods", action="store_true", help="Prints available method names"
         )
+        self.parser.add_argument(
+            "--generate-config",
+            action="store_true",
+            help=f"Creates the default toml file to path {DEFAULT_TOML_FILE}",
+        )
 
     def parse(self):
         return self.parser.parse_args()
@@ -61,9 +68,9 @@ class Benchmark:
 
     def __init__(
         self,
-        hash_method,
+        hash_method: type[HashMethod],
         image_paths: list[Path],
-        mods: list[Modification],
+        mods: list[type[Modification]],
         img_openers: int,
         img_modifiers: int,
         img_hashers: int,
@@ -131,7 +138,7 @@ class Benchmark:
             result.extend(match_result.match_results)
 
         print("Calculating roc")
-        Roc(result, self.method)
+        Roc(result, self.method._name)
 
     def _open_imgs(self, paths: "Queue[Path | StopSignal]", imgs: "Queue"):
         while True:
@@ -229,8 +236,8 @@ class Benchmark:
 class BenchmarkBuilder:
     def __init__(
         self,
-        image_paths: list[Path],
-        mods: list[Modification] = [Base(), Flip()],
+        image_paths: Optional[list[Path]] = None,
+        mods: list[type[Modification]] = [Base, Flip],
         hash_method: type[HashMethod] = AverageHash,
         img_openers: int = 1,
         img_modifiers: int = 1,
@@ -250,11 +257,27 @@ class BenchmarkBuilder:
         self.input_images = image_paths
         return self
 
+    def set_image_paths_with_dir(self, dir_path: Path) -> "BenchmarkBuilder":
+        if not dir_path.is_dir():
+            raise ValueError(
+                f"BenchmarkBuilder with dir did not take dir. Path:{dir_path}"
+            )
+
+        paths = [p for p in dir_path.rglob("*") if p.is_file()]
+
+        if paths is None:
+            raise ValueError(
+                f"BenchmarkBuilder with dir did not find any files. Check {dir_path}"
+            )
+
+        self.input_images = paths
+        return self
+
     def set_mods(self, mods: list[type[Modification]]) -> "BenchmarkBuilder":
         self.mods = mods
         return self
 
-    def set_hash_method(self, hash_method: HashMethod) -> "BenchmarkBuilder":
+    def set_hash_method(self, hash_method: type[HashMethod]) -> "BenchmarkBuilder":
         self.method = hash_method
         return self
 
@@ -275,6 +298,9 @@ class BenchmarkBuilder:
         return self
 
     def run(self):
+        if self.input_images is None:
+            raise ValueError("BenchmarkBuilder did not receive input_paths")
+
         logging.info(
             "Starting benchmark with method=%s, input_images=%d images, mods=%s, "
             "img_openers=%d, img_modifiers=%d, img_hashers=%d, result_calculators=%d",
@@ -302,6 +328,20 @@ class BenchmarkBuilder:
             self.img_hashers,
             self.result_calculators,
         ).benchmark()
+
+    @classmethod
+    def use_config(cls, config: BenchmarkConfig):
+        for hash_method in config.hashing_methods:
+            (
+                BenchmarkBuilder()
+                .set_hash_method(hash_method)
+                .set_mods(list(config.modifications))
+                .set_image_paths_with_dir(config.input_path)
+                .set_img_openers(config.img_open_procs)
+                .set_img_hashers(config.hash_procs)
+                .set_img_modifiers(config.mod_procs)
+                .run()
+            )
 
 
 class DbGen:
