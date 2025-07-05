@@ -1,6 +1,6 @@
 import logging
 from typing import Optional
-from hashing_methods import ImageHash
+from hash_image import ImageHash
 from db import Db
 
 

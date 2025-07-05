@@ -1,9 +1,10 @@
 import logging
-from multiprocessing import parent_process
 from lib import BenchmarkBuilder, Config, DbGen
 from users import User
 from pathlib import Path
-from hashing_methods import AverageHash
+from hash_methods import AverageHash
+from registries import Modifications, HashMethods
+from rich import print
 
 
 TEST_IMG = Path("./gruppen_test_bilder/IMG_0651.jpg")
@@ -14,6 +15,10 @@ TEST_HASHING_METHOD = AverageHash
 
 def main():
     args = Config().parse()
+
+    if args.get_methods:
+        print(HashMethods())
+        print(Modifications())
 
     if args.create_user is not None:
         if args.file and args.dir is None:  # If no files are specified

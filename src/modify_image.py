@@ -1,47 +1,16 @@
-from abc import ABC, abstractmethod
 from multiprocessing import Queue
 from PIL import Image
 from pathlib import Path
 from typing import Optional
 from crypt_hash import PilSha256
 from pickle_img import PickleableImage
+from modify_methods import Base
+from interfaces import Modification
+
 
 import logging
 
 TMP_FOLDER = Path.cwd() / "modified_imgs"
-
-
-class Modification(ABC):
-    def __init__(self, name: str) -> None:
-        self._name = name
-
-    @abstractmethod
-    def modify(self, img: Image.Image, **kwargs) -> Image.Image:
-        pass
-
-    def __str__(self) -> str:
-        return self._name
-
-    @property
-    def name(self) -> str:
-        return self._name
-
-
-class Flip(Modification):
-    def __init__(self) -> None:
-        super().__init__("flip")
-
-    def modify(self, img: Image.Image, **kwargs) -> Image.Image:
-        flipped = img.transpose(Image.Transpose.FLIP_LEFT_RIGHT)
-        return flipped
-
-
-class Base(Modification):
-    def __init__(self) -> None:
-        super().__init__("base")
-
-    def modify(self, img: Image.Image, **kwargs) -> Image.Image:
-        return img
 
 
 class ModImage:
@@ -137,7 +106,7 @@ class ModImageBuilder:
         self.path = path
         return self
 
-    def run(self) -> list[ModImage] | ModImage | None:
+    def run(self) -> list[ModImage] | ModImage | None | Image.Image:
         if self.mod is None and self.mods is None:
             raise ValueError("No modification assigned to ModProcessBuilder")
 
@@ -148,6 +117,7 @@ class ModImageBuilder:
 
         if self.mod is not None:
             mod_img = ModImage.new(self.img, self.mod, self.save_dir)
+            assert mod_img is not None
             if self.return_img:
                 return mod_img.modified_image
             return mod_img
@@ -156,6 +126,9 @@ class ModImageBuilder:
             mod_imgs = []
             for mod in self.mods:
                 mod_img = ModImage.new(self.img, mod, self.save_dir)
+
+                assert mod_img is not None
+
                 if self.return_img:
                     mod_imgs.append(mod_img.modified_image)
                 mod_imgs.append(mod_img)
@@ -165,6 +138,9 @@ class ModImageBuilder:
         elif self.mods and self.queue is not None:
             for mod in self.mods:
                 mod_img = ModImage.new(self.img, mod, self.save_dir)
+
+                assert mod_img is not None
+
                 img = mod_img.modified_image
                 if self.pickleable_img:
                     img = PickleableImage.from_pil_image(img, self.path)
@@ -175,6 +151,3 @@ class ModImageBuilder:
 
         else:
             raise ValueError("No mod or mods parameter were given")
-
-
-MODIFIERS = [Flip(), Base()]

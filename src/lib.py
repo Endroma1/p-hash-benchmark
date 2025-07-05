@@ -4,9 +4,11 @@ from PIL import Image
 from pathlib import Path
 from queue import Empty
 
-from hashing_methods import AverageHash, HashJobBuilder, HashMethod, ImageHash
+from hash_methods import AverageHash
+from hash_image import HashJobBuilder, HashMethod, ImageHash
 from pickle_img import PickleableImage
-from modify_image import Base, Flip, ModImage, ModImageBuilder, Modification
+from modify_image import Base, ModImage, ModImageBuilder, Modification
+from modify_methods import Flip
 from matching import MatchingProcess, MatchResult
 from multiprocessing import Event, Process, Queue, Pool, current_process
 from result_calc import Roc
@@ -38,6 +40,9 @@ class Config:
         )
         self.parser.add_argument(
             "-x", "--benchmark", action="store_true", help="Starts the benchmark"
+        )
+        self.parser.add_argument(
+            "--get-methods", action="store_true", help="Prints available method names"
         )
 
     def parse(self):
