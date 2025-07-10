@@ -218,7 +218,6 @@ class Benchmark:
 
             path = pickleable.path
             img = pickleable.to_pil_image()
-            logging.debug(f"hashing image: {img} {path}")
 
             assert isinstance(path, Path)
 

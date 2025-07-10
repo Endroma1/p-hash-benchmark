@@ -1,5 +1,8 @@
 from abc import ABC
 from typing import Optional
+import logging
+
+from numpy import dtype, ndarray
 
 from matching import MatchResult
 from sklearn.metrics import roc_curve, auc
@@ -18,11 +21,18 @@ class Roc(ResultMethod):
     def __init__(self, match_results: list[MatchResult], method_name: str) -> None:
         super().__init__(match_results)
 
-        (fpr, tpr, thresholds) = self.fpr_tpr_calc()
+        result = self.fpr_tpr_calc()
+        if result is None:
+            return None
 
+        (fpr, tpr, thresholds) = result
         self.plot_roc(method_name, fpr, tpr, f"AUC{self.auc(fpr, tpr)}")
 
-    def fpr_tpr_calc(self):
+    def fpr_tpr_calc(self) -> Optional[tuple]:
+        if not self.matches:
+            logging.warning("Match result is empty. No roc plots will be made")
+            return None
+
         y_true = [int(match.is_same_image) for match in self.matches]
         y_scores = [-match.hamming_distance for match in self.matches]
 

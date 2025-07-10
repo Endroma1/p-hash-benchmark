@@ -6,6 +6,7 @@ from users import User
 from pathlib import Path
 from hash_methods import AverageHash
 from interfaces import HashMethod
+from rich import print
 
 
 class ImageHash:
@@ -85,7 +86,9 @@ class ImageHash:
                 hashes.append(cls(hash, method, img_name=name))
 
         if not hashes:
-            logging.warning("No users found when loading hashes from db")
+            print(
+                "[red]Warning[/red]: No hashes found in db. They should be generated for matching"
+            )
 
         return hashes
 
