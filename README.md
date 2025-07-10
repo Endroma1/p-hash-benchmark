@@ -3,6 +3,8 @@
 This is a project created for a thesis by the following creators.
 - Martin Hafstad
 - Henrik (Endroma, Heste)
+- Simen
+- Thias
 
 ## Features
 - Modifies images based on a set of modifications.
@@ -12,5 +14,3 @@ This is a project created for a thesis by the following creators.
 
 ## To do
 - Create scatterplot for result calc.
-- Create interface to config file for preconfiguring benchmarks.
-- Create logic and obj for preconfiguring benchmarks.
