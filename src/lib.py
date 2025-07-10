@@ -186,12 +186,16 @@ class Benchmark:
             img = pickleable.to_pil_image()
 
             try:
-                ModImageBuilder(img).set_mods(self.mods).set_queue(
-                    mod_imgs
-                ).set_pickleable_img(True, path).run()
+                modified_imgs: list[ModImage] = (
+                    ModImageBuilder(img).set_mods(self.mods).run()
+                )
             except Exception as e:
                 logging.error(f"Error modifying image, {e}")
                 continue
+
+            for modify_img in modified_imgs:
+                pickle = PickleableImage.from_pil_image(modify_img.image, path)
+                mod_imgs.put(pickle)
 
     def _hash_imgs(
         self,
@@ -214,6 +218,7 @@ class Benchmark:
 
             path = pickleable.path
             img = pickleable.to_pil_image()
+            logging.debug(f"hashing image: {img} {path}")
 
             assert isinstance(path, Path)
 
