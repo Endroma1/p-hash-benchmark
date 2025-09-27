@@ -120,7 +120,7 @@ class ConfigInterface:
 
     @staticmethod
     def default_config_path() -> Path:
-        config_file_name = "config.toml"
+        config_file_name = "config.json"
         config = os.environ.get("P_HASH_CONFIG_PATH")
         if config is not None:
             logging.info("Using P_HASH_CONFIG_PATH to store config file")
@@ -202,12 +202,10 @@ class ConfigInterface:
         return config
 
     @classmethod
-    def read_file(cls, path: Optional[Path] = None) -> "BenchmarkConfig":
-        if path is None:
-            path = DEFAULT_TOML_FILE
+    def read_file(cls, path: Path) -> "BenchmarkConfig":
 
         with open(path) as f_in:
-            entry = toml.load(f_in)
+            entry = json.load(f_in)
 
         config = cls._from_dict(entry)
 

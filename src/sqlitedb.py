@@ -1,7 +1,7 @@
 from pathlib import Path
 import os
 import sqlite3
-from typing import Iterable, Optional, Tuple
+from typing import Any, Iterable, Optional, Sequence, Tuple
 
 
 class DB:
@@ -22,6 +22,7 @@ class DB:
         if self.conn:
             self.conn.commit()
             self.conn.close()
+            self.conn = None
 
     def execute(self, query: str, params: Tuple = ()) -> sqlite3.Cursor:
         if not self.conn:
@@ -32,11 +33,11 @@ class DB:
 
     def executescript(self, query: str) -> sqlite3.Cursor:
         if not self.conn:
-            raise DBNotConnected
+            raise DBNotConnected()
 
         return self.conn.executescript(query)
 
-    def executemany(self, query: str, parameters: Iterable) -> sqlite3.Cursor:
+    def executemany(self, query: str, parameters: Iterable[Sequence[Any]]) -> sqlite3.Cursor:
         if not self.conn:
             raise DBNotConnected()
 

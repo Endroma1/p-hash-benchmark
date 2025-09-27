@@ -16,7 +16,7 @@ from result_calc import Roc
 from config import BenchmarkConfig
 import logging
 
-from sqlite_imghash import ImgHashDB, UserPathsQueuer
+from sqlite_imghash import ImgHashDB, SendHashQueueToDb, UserPathsQueuer
 from multiprocess_tools import STOP, StopSignal
 
 
@@ -78,10 +78,14 @@ class Benchmark:
             for _ in range(self.img_hashers)
         ]
 
+        hash_senders = ImgHashDB().send_hashes_from_queue(q_hashes)
+
         fetcher.start()
 
         for p in openers + modifiers + hashers:
             p.start()
+
+        hash_senders.start()
 
         fetcher.join(self.img_openers)
         print("Db fetchers done")
@@ -109,6 +113,9 @@ class Benchmark:
         logging.info("hashed all images")
         result: list[MatchResult] = []
 
+        hash_senders.join()
+
+        # Mathcing needs to take hashes from db. Basically, take hashes with given methods and images and compare them to a given user's base images.
         while not q_hashes.empty():
             hash = q_hashes.get()
             if isinstance(hash, StopSignal):
@@ -203,7 +210,7 @@ class Benchmark:
             assert isinstance(path, Path)
 
             try:
-                hash = (
+                hash:ImageHash = (
                     HashJobBuilder()
                     .set_img(img)
                     .set_method(self.method)

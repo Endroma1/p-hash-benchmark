@@ -1,32 +1,81 @@
 from dataclasses import dataclass
 from multiprocessing import Process, Queue
-from typing import Optional
+from typing import Optional, Type, TypeVar
 from sqlitedb import DB, DBNotConnected, QueryNotFound
 from pathlib import Path
 from colorama import Fore, Style, init
+from registries import HashMethods, Modifications
+from interfaces import HashMethod, Modification
 import numpy as np
 
 from multiprocess_tools import STOP, StopSignal
 from matching import MatchResult
+from hash_image import ImageHash
 
 
 init(autoreset=True)
 
 
-class DbImage:
+
+
+
+def send_methods_to_db(db_name:str):
+    print("Sending methods to db")
+    hash_methods: list[tuple[str]] = [(n,) for n in HashMethods().get_names()]
+    modifications: list[tuple[str]] = [(n,) for n in (Modifications().get_names())]
+
+    hash_query = "INSERT OR IGNORE INTO hash_methods (name) VALUES (?);"
+    modification_query = "INSERT OR IGNORE INTO modifications (name) VALUES (?);"
+
+    db = DB(db_name).connect()
+    try:
+        db.executemany(hash_query, hash_methods)
+        db.executemany(modification_query, modifications)
+    except Exception as e:
+        raise  SendMethodsDbError(e)
+
+    finally:
+        db.disconnect()
+
+class SendMethodsDbError(Exception):
+    def __init__(self, e:Exception) -> None:
+        self.error = e
+        super().__init__(e)
+
+    def __str__(self) -> str:
+        return f"Could not send methods to db: {self.error}"
+
+
+class DbHash:
     def __init__(
         self,
         image_id: int,
         value: str,
         hash_method_id: int,
     ) -> None:
-        pass
+        self.image_id = image_id
+        self.value = value
+        self.hash_method_id = hash_method_id
+
+    def to_tuple(self) ->tuple[int, str, int]:
+        return(self.image_id, self.value, self.hash_method_id)
+
+    @classmethod
+    def from_image_hash(cls,image_hash:ImageHash):
+        db = ImgHashDB()
+        try:
+            image_id = db.get_img_id(image_hash.name)
+            hash_method_id = db.get_hash_method_id(image_hash.method)
+        finally:
+            db.disconnect()
+        return cls(image_id, image_hash.hash, hash_method_id)
 
 
-class SendImageQueueToDb:
+
+class SendHashQueueToDb:
     def __init__(
         self,
-        image_queue: Queue[DbImage | StopSignal],
+        image_queue: Queue,
         db_name: str,
         batch_size: int = 500,
         img_senders: int = 1,
@@ -36,25 +85,38 @@ class SendImageQueueToDb:
         self.batch_size = batch_size
         self.processes = self._processes(img_senders)
 
-        [p.start() for p in self.processes]
 
     def _processes(self, processes: int):
         return [Process(target=self._worker) for _ in range(processes)]
 
+    def start(self):
+        [p.start() for p in self.processes]
+
     def join(self):
         [p.join() for p in self.processes]
+        
 
-    def _worker(self):
+    def _worker(self) -> None:
+        done:bool = False
+        db = DB(self.db_name).connect()
         while True:
-            db = DB(self.db_name).connect()
             query = """
-                    INSERT INTO hashes (hash) 
+                    INSERT INTO hashes (image_id, value, hash_method_id) 
                     VALUES (?,?,?);
                     """
+            values: list[tuple[int, str, int]] = []
             for _ in range(self.batch_size):
-                value = self.queue.get()
+                value: ImageHash|StopSignal  = self.queue.get()
                 if isinstance(value, StopSignal):
+                    done = True
                     break
+                dbhash = DbHash.from_image_hash(value)
+                values.append(dbhash.to_tuple())
+
+            db.executemany(query, values)
+
+            if done:
+                break
 
         db.disconnect()
 
@@ -181,9 +243,7 @@ class ImgHashDB:
 
             CREATE TABLE IF NOT EXISTS modifications (
                 id INTEGER PRIMARY KEY,
-                image_id INTEGER,
-                name TEXT UNIQUE,
-                FOREIGN KEY (image_id) REFERENCES images(id) on DELETE CASCADE
+                name TEXT UNIQUE
                 );
 
             CREATE TABLE IF NOT EXISTS hash_methods (
@@ -205,7 +265,7 @@ class ImgHashDB:
                 hash_id_1 INTEGER,
                 hash_id_2 INTEGER,
                 value TEXT,
-                FOREIGN KEY (hash_id_1) REFERENCES hashes(id) ON DELETE SET NULL
+                FOREIGN KEY (hash_id_1) REFERENCES hashes(id) ON DELETE SET NULL,
                 FOREIGN KEY (hash_id_2) REFERENCES hashes(id) ON DELETE SET NULL
                 );
             
@@ -226,6 +286,13 @@ class ImgHashDB:
         """
         Hashes the images given by imagepaths linked to a user.
         """
+
+    def send_methods_to_db(self)-> "ImgHashDB":
+        send_methods_to_db(self.db_path)
+        return self
+
+    def send_hashes_from_queue(self, queue:Queue)-> "SendHashQueueToDb":
+        return SendHashQueueToDb(queue, self.db_path)
 
     def paths_query(
         self, output_queue: Queue, batch_size: int = 1000, processes: int = 1
@@ -394,6 +461,40 @@ class ImgHashDB:
         except Exception as e:
             raise GetUidError(e, username)
 
+    def get_img_id(self, image_name:str):
+        if not self.db:
+            raise DBNotConnected()
+
+        try: 
+            cur_img_id = self.db.fetchone(
+                "SELECT id FROM images WHERE path = ?", (image_name,)
+            )
+            if cur_img_id is None:
+                raise ImgNotFound(image_name)
+            return int(cur_img_id[0])
+        except Exception as e:
+            raise GetImgIdError(image_name,e)
+
+    def get_hash_method_id(self, hash_method:str) -> int:
+        if not self.db:
+            raise DBNotConnected()
+
+        cur_id = self.db.fetchone(
+            "SELECT id FROM hash_methods WHERE name = ?", (hash_method,)
+        )
+        if cur_id is None:
+            raise ImgNotFound(hash_method)
+        return int(cur_id[0])
+    def get_modification_id(self, modification:str) -> int:
+        if not self.db:
+            raise DBNotConnected()
+
+        cur_id = self.db.fetchone(
+            "SELECT id FROM modifications WHERE name = ?", (modification,)
+        )
+        if cur_id is None:
+            raise ImgNotFound(modification)
+        return int(cur_id[0])
     def add_match_results(self, match_results: list[MatchResult]):
         if not self.db:
             raise DBNotConnected()
@@ -526,3 +627,17 @@ class ImageAddError(Exception):
 
     def __str__(self) -> str:
         return f"Could not add images from path {self.path}, error: {self.error}"
+
+class ImgNotFound(Exception):
+    def __init__(self, img_query: str) -> None:
+        self.img_query = img_query
+
+    def __str__(self) -> str:
+        return f"Did not find img {self.img_query}"
+class GetImgIdError(Exception):
+    def __init__(self, img_query: str, error:Exception) -> None:
+        self.img_query = img_query
+        self.error = error
+
+    def __str__(self) -> str:
+        return f"Could not get img id for img {self.img_query}, error: {self.error}"

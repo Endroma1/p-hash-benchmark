@@ -22,13 +22,17 @@ class Benchmark(SubCommand):
 
     @staticmethod
     def parse(args: argparse.Namespace) -> None:
+        print("Parse")
         try:
             config_path: Path = args.config or ConfigInterface.default_config_path()
         except Exception as e:
             raise ConfigNotGiven()
 
+        print("Read fili")
         try:
             config: BenchmarkConfig = ConfigInterface.read_file(config_path)
+        except FileNotFoundError:
+            raise ConfigNotFound(config_path)
         except Exception as e:
             raise ConfigError(e)
 
@@ -45,6 +49,13 @@ class ConfigNotGiven(Exception):
     def __str__(self) -> str:
         return "Config not given or config not found from default path"
 
+class ConfigNotFound(Exception):
+    def __init__(self, path:Path) -> None:
+        self.path = path
+        pass
+
+    def __str__(self) -> str:
+        return f"Config from path {self.path} could not be found"
 
 class BenchmarkError(Exception):
     def __init__(self, e: Exception) -> None:
