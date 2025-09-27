@@ -8,13 +8,17 @@ class MatchResult:
     def __init__(
         self,
         input_img: str,
+        input_hash: str,
         db_img: str,
+        db_hash: str,
         hamming_distance: Optional[float] = None,
         is_same_user: Optional[bool] = None,
         is_same_image: Optional[bool] = None,
     ) -> None:
         self._input_img = input_img
+        self._input_hash = input_hash
         self._db_img = db_img
+        self._db_hash = db_hash
         self._hamming_distance = hamming_distance
         self._is_same_user = is_same_user
         self._is_same_image = is_same_image
@@ -52,7 +56,9 @@ class MatchResult:
         entry = [
             {
                 "input_img": self._input_img,
+                "input_hash": self._input_hash,
                 "db_img": self._db_img,
+                "db_hash": self._db_hash,
                 "hamming_distance": self._hamming_distance,
                 "is_same_user": self._is_same_user,
                 "is_same_image": self._is_same_image,

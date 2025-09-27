@@ -1,4 +1,5 @@
 from itertools import product, starmap
+from re import sub
 from typing import Callable, Optional, Iterator, TextIO
 from PIL import Image
 from pathlib import Path
@@ -14,53 +15,12 @@ from multiprocessing import Event, Process, Queue, Pool, current_process
 from result_calc import Roc
 from config import BenchmarkConfig
 import logging
-import argparse
-from config import DEFAULT_TOML_FILE
+
+from sqlite_imghash import ImgHashDB, UserPathsQueuer
+from multiprocess_tools import STOP, StopSignal
 
 
 logging.basicConfig(filename="app.log", level=logging.DEBUG, filemode="w")
-
-
-class Config:
-    def __init__(self) -> None:
-        self.parser = argparse.ArgumentParser(description="ImageHash Benchmarking Tool")
-        self._arguments()
-
-    def _arguments(self):
-        self.parser.add_argument(
-            "-c",
-            "--create-user",
-            help="Creates a new user with given name, creates an empty user if -d or -f is not specified",
-        )
-        self.parser.add_argument("-d", "--dir", type=Path, help="Specifies a dir")
-        self.parser.add_argument("-f", "--file", type=Path, help="Specifies a file")
-        self.parser.add_argument(
-            "-g",
-            "--gen",
-            action="store_true",
-            help="Generates hashes and sends to db. Essentially the main program without modifying or matching.",
-        )
-        self.parser.add_argument(
-            "-x", "--benchmark", action="store_true", help="Starts the benchmark"
-        )
-        self.parser.add_argument(
-            "--get-methods", action="store_true", help="Prints available method names"
-        )
-        self.parser.add_argument(
-            "--generate-config",
-            action="store_true",
-            help=f"Creates the default toml file to path {DEFAULT_TOML_FILE}",
-        )
-
-    def parse(self):
-        return self.parser.parse_args()
-
-
-class StopSignal:
-    pass
-
-
-STOP: StopSignal = StopSignal()
 
 
 class Benchmark:
@@ -71,19 +31,26 @@ class Benchmark:
         hash_method: type[HashMethod],
         image_paths: list[Path],
         mods: list[type[Modification]],
+        db_fetchers: int,
         img_openers: int,
         img_modifiers: int,
         img_hashers: int,
         result_calculators: int,
+        all_users: bool,
+        users: list[Path],
     ) -> None:
         self.method = hash_method
         self.input_images = image_paths
         self.mods = mods
 
+        self.db_fetchers = db_fetchers
         self.img_openers = img_openers
         self.img_modifiers = img_modifiers
         self.img_hashers = img_hashers
         self.result_calculators = result_calculators
+
+        self.all_users = all_users
+        self.users = users
 
     def benchmark(self):
         q_paths: "Queue[Path | StopSignal]" = Queue()
@@ -91,8 +58,10 @@ class Benchmark:
         q_mods: "Queue[PickleableImage | StopSignal]" = Queue()
         q_hashes: "Queue[ImageHash | StopSignal]" = Queue()
 
-        [q_paths.put(p) for p in self.input_images]
-        [q_paths.put(STOP) for _ in range(self.img_openers)]
+        # [q_paths.put(p) for p in self.input_images]
+        # [q_paths.put(STOP) for _ in range(self.img_openers)]
+
+        fetcher = ImgHashDB().get_user_paths_to_queue(self.db_fetchers, q_paths)
 
         openers = [
             Process(target=self._open_imgs, args=(q_paths, q_imgs))
@@ -109,11 +78,18 @@ class Benchmark:
             for _ in range(self.img_hashers)
         ]
 
+        fetcher.start()
+
         for p in openers + modifiers + hashers:
             p.start()
 
+        fetcher.join(self.img_openers)
+        print("Db fetchers done")
+
+        print("Waiting for image openers")
         for p in openers:
             p.join()
+        print("Img openenrs done")
 
         logging.info("Opened all images")
         [q_imgs.put(STOP) for _ in range(self.img_modifiers)]
@@ -121,14 +97,18 @@ class Benchmark:
         for p in modifiers:
             p.join()
 
+        print("Img modifiers done")
+
         logging.info("modified all images")
         [q_mods.put(STOP) for _ in range(self.img_hashers)]
 
         for p in hashers:
             p.join()
 
+        print("Img hashers done")
         logging.info("hashed all images")
         result: list[MatchResult] = []
+
         while not q_hashes.empty():
             hash = q_hashes.get()
             if isinstance(hash, StopSignal):
@@ -140,9 +120,10 @@ class Benchmark:
         print("Calculating roc")
         Roc(result, self.method._name)
 
-    def _open_imgs(self, paths: "Queue[Path | StopSignal]", imgs: "Queue"):
+    def _open_imgs(self, paths: "Queue[Path | object]", imgs: "Queue"):
         while True:
             path = paths.get()
+
             if isinstance(path, StopSignal):
                 break
 
@@ -243,19 +224,25 @@ class BenchmarkBuilder:
         image_paths: Optional[list[Path]] = None,
         mods: list[type[Modification]] = [Base, Flip],
         hash_method: type[HashMethod] = AverageHash,
+        db_fetchers: int = 1,
         img_openers: int = 1,
         img_modifiers: int = 1,
         img_hashers: int = 1,
         result_calculators: int = 1,
+        all_users: bool = True,
+        users: list[Path] = [],
     ) -> None:
         self.method = hash_method
         self.input_images = image_paths
         self.mods = mods
 
+        self.db_fetchers = db_fetchers
         self.img_openers = img_openers
         self.img_modifiers = img_modifiers
         self.img_hashers = img_hashers
         self.result_calculators = result_calculators
+        self.all_users = all_users
+        self.users = users
 
     def set_image_paths(self, image_paths: list[Path]) -> "BenchmarkBuilder":
         self.input_images = image_paths
@@ -289,6 +276,10 @@ class BenchmarkBuilder:
         self.img_openers = img_openers
         return self
 
+    def set_db_fetchers(self, db_fetchers: int) -> "BenchmarkBuilder":
+        self.db_fetchers = db_fetchers
+        return self
+
     def set_img_modifiers(self, img_modifiers: int) -> "BenchmarkBuilder":
         self.img_modifiers = img_modifiers
         return self
@@ -299,6 +290,14 @@ class BenchmarkBuilder:
 
     def set_result_calculators(self, result_calculators: int) -> "BenchmarkBuilder":
         self.result_calculators = result_calculators
+        return self
+
+    def set_all_users(self, all_users: bool) -> "BenchmarkBuilder":
+        self.all_users = all_users
+        return self
+
+    def set_users(self, users: list[Path]) -> "BenchmarkBuilder":
+        self.users = users
         return self
 
     def run(self):
@@ -327,14 +326,17 @@ class BenchmarkBuilder:
             self.method,
             self.input_images,
             self.mods,
+            self.db_fetchers,
             self.img_openers,
             self.img_modifiers,
             self.img_hashers,
             self.result_calculators,
+            self.all_users,
+            self.users,
         ).benchmark()
 
     @classmethod
-    def use_config(cls, config: BenchmarkConfig):
+    def from_config(cls, config: BenchmarkConfig):
         for hash_method in config.hashing_methods:
             (
                 BenchmarkBuilder()

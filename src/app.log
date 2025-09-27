@@ -1,0 +1,17 @@
+INFO:root:Using HOME/.config to store config file
+INFO:root:Starting benchmark with method=AverageHash, input_images=11 images, mods=['Base'], img_openers=1, img_modifiers=1, img_hashers=1, result_calculators=1
+ERROR:root:Invalid value in open_img queue. Got value WIN_20250218_09_45_56_Pro.jpg, expected path or STOP signal. 
+ERROR:root:Invalid value in open_img queue. Got value WIN_20250218_09_46_03_Pro.jpg, expected path or STOP signal. 
+ERROR:root:Invalid value in open_img queue. Got value IMG_0651.jpg, expected path or STOP signal. 
+ERROR:root:Invalid value in open_img queue. Got value WIN_20250218_09_46_08_Pro.jpg, expected path or STOP signal. 
+ERROR:root:Invalid value in open_img queue. Got value WIN_20250218_09_46_13_Pro.jpg, expected path or STOP signal. 
+ERROR:root:Invalid value in open_img queue. Got value IMG_0652.jpg, expected path or STOP signal. 
+ERROR:root:Invalid value in open_img queue. Got value WIN_20250218_09_45_59_Pro.jpg, expected path or STOP signal. 
+ERROR:root:Invalid value in open_img queue. Got value IMG_0654.jpg, expected path or STOP signal. 
+ERROR:root:Invalid value in open_img queue. Got value IMG_0653.jpg, expected path or STOP signal. 
+ERROR:root:Invalid value in open_img queue. Got value WIN_20250218_09_46_11_Pro.jpg, expected path or STOP signal. 
+ERROR:root:Invalid value in open_img queue. Got value WIN_20250218_09_46_06_Pro.jpg, expected path or STOP signal. 
+INFO:root:Opened all images
+INFO:root:modified all images
+INFO:root:hashed all images
+WARNING:root:Match result is empty. No roc plots will be made

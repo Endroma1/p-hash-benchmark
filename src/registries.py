@@ -2,7 +2,7 @@
 Register all methods for hashing, modification and result calc objects in dictionaries.
 """
 
-from typing import Generic, Optional, TypeVar
+from typing import Generic, TypeVar
 
 from rich.console import RenderableType
 from rich.text import Text

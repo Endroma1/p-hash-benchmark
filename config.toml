@@ -1,0 +1,9 @@
+[general]
+input_path = "/home/henrik/projects/python/p-hash-benchmark/gruppens_test_bilder"
+hashing_methods = [ "average_hash",]
+modifications = [ "base",]
+
+[procs]
+img_open_procs = 1
+mod_procs = 1
+hash_procs = 1
