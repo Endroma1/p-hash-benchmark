@@ -3,10 +3,10 @@
 
 sleep 5
 echo "Starting modification"
-. ./modify_image/start_modify.sh
+make -C ./modify_image/
 
 echo "Starting hashing"
-. ./hash_image/start_hash.sh
+make -C ./hash_image/
 
 echo "Starting matching"
-. ./match_image/start_match.sh
+make -C ./match_image/
