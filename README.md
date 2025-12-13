@@ -1,3 +1,5 @@
+# p-hash-benchmark
+
 This is a project created for a thesis by the following creators.
 
 - Henrik
