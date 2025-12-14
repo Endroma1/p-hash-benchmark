@@ -39,5 +39,4 @@ To add modifications/hashing_methods add them to the `modify_image/src/modificat
 - Matches all hashes against others of the same types. Skips (A,B) if (B,A) already exists but not (A,A).
 
 ## To Do
-- Add users that group images of the same person.
 - Add caching to the modification and hashing components.
