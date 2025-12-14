@@ -1,7 +1,6 @@
 #!/bin/bash
 . ./db/rebuild_db.sh
 
-sleep 5
 echo "Starting modification"
 make -C ./modify_image/ >/dev/null
 

@@ -40,4 +40,11 @@ def open_image(img: db.ModifiedImage):
 
 
 if __name__ == "__main__":
-    main()
+    while True:
+        try:
+            main()
+        except psycopg2.OperationalError:
+            time.sleep(1)
+            continue
+
+        break

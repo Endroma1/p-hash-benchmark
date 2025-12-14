@@ -1,5 +1,8 @@
 from dataclasses import dataclass
+import time
 from pathlib import Path
+
+import psycopg2
 from PIL import Image
 from typing import Generator
 import config as cf
@@ -87,4 +90,11 @@ def hash_image(img:Image.Image)->str:
     return hash 
 
 if __name__ == "__main__":
-    main()
+    while True:
+        try:
+            main()
+        except psycopg2.OperationalError:
+            time.sleep(1)
+            continue
+
+        break

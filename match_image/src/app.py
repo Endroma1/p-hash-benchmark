@@ -1,5 +1,7 @@
 from typing import Generator 
 import db
+import time
+import psycopg2
 
 def main():
     process_images()
@@ -57,4 +59,11 @@ def match_images(hash1:str, hash2:str)->float:
     return distance / total_bits
 
 if __name__ == "__main__":
-    main()
+    while True:
+        try:
+            main()
+        except psycopg2.OperationalError:
+            time.sleep(1)
+            continue
+
+        break
