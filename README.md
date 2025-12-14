@@ -30,7 +30,7 @@ Prerequisites:
 4. Use SQL to extract data, schema found in `db/init.sql `
 
 ### Adding Methods
-To add modifications/hashing_methods add them to the `modify_image/src/modification.py` `hash_image/src/hash_image.py`. Use the `@Modifications`  or `@HashingMethods` decorator and implement the `Modification` or `HashinMethod` interface.
+To add modifications/hashing_methods add them to the `modify_image/src/modification.py` or `hash_image/src/hash_image.py`. Use the `@Modifications`  or `@HashingMethods` decorators and implement the `Modification` or `HashinMethod` interface.
 
 
 ## Features
