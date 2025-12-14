@@ -10,7 +10,7 @@ def main():
         id_index = 1 # Start at 1 since there is no index 0
         fetch_amount = 100
         while True:
-            imgs:list[db.Image] = database.get_images(id_index, fetch_amount)
+            imgs:list[db.ModifiedImage] = database.get_images(id_index, fetch_amount)
 
             if not imgs:
                 break
@@ -20,7 +20,7 @@ def main():
 
             id_index += fetch_amount
 
-def process_image(img: db.Image ):
+def process_image(img: db.ModifiedImage ):
     for name, Method in hash_image.HashingMethods().hashing_methods.items():
 
         with Image.open(img.image_path) as open_image:
@@ -35,7 +35,7 @@ def process_image(img: db.Image ):
                 database.add_hash_method(name)
                 database.send_hash(hash, img.id, name)
 
-def open_image(img: db.Image):
+def open_image(img: db.ModifiedImage):
     Image.open(img.image_path)
 
 

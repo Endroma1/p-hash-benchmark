@@ -5,7 +5,7 @@ from typing import Self
 from pathlib import Path
 
 @dataclass
-class Image:
+class ModifiedImage:
     id: int
     image_path: Path
     name: str
@@ -21,17 +21,17 @@ class Database(ContextDecorator):
     def __init__(self, dbname:str, user:str, password:str, host:str, port:int) -> None:
         self.conn = psycopg2.connect(dbname=dbname, user=user, password=password, host=host, port=port)
 
-    def get_images(self, start: int, fetch_amount: int)->list[Image]:
+    def get_images(self, start: int, fetch_amount: int)->list[ModifiedImage]:
         cur = self.conn.cursor()
-        cur.execute("SELECT * FROM images WHERE id >= %s", (start,))
+        cur.execute("SELECT * FROM modified_images WHERE id >= %s", (start,))
         result = cur.fetchmany(fetch_amount)
 
-        return [Image(id ,p , n, hm) for id, p, n ,hm in result]
+        return [ModifiedImage(id ,p , n, hm) for id, p, n ,hm in result]
 
     def send_hash(self, hash: str, img_id:int, hashing_method_name:str):
         hash_method_id = self.get_hash_method_id(hashing_method_name)
         cur = self.conn.cursor()
-        cur.execute("INSERT INTO hashes (hash, image_id, hashing_method_id) VALUES (%s, %s, %s) ON CONFLICT DO NOTHING", (hash, img_id,hash_method_id))
+        cur.execute("INSERT INTO hashes (hash, modified_image_id, hashing_method_id) VALUES (%s, %s, %s) ON CONFLICT DO NOTHING", (hash, img_id,hash_method_id))
 
     def get_hash_method_id(self, hash_method_name:str)->int:
         cur = self.conn.cursor()
