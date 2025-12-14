@@ -2,6 +2,7 @@ import psycopg2
 import db
 import config as cf
 import hash_image
+import time
 from PIL import Image
 
 CONFIG = cf.Config.from_env()

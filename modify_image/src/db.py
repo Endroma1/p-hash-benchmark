@@ -1,7 +1,7 @@
 from contextlib import ContextDecorator
 from dataclasses import dataclass
 import psycopg2
-from typing import Self
+from typing import Generator, Self
 from pathlib import Path
 
 @dataclass
@@ -10,41 +10,23 @@ class ModificationIDNotFound(Exception):
     def __str__(self) -> str:
         return f"Could not find id for modification {self.name}. Is it in the DB?"
 
+@dataclass
+class Image:
+    id: int
+    path: Path
+    user_id: int
+
 class Database(ContextDecorator):
     def __init__(self, dbname:str, user:str, password:str, host:str, port:int) -> None:
         self.conn = psycopg2.connect(dbname=dbname, user=user, password=password, host=host, port=port)
 
-    def add_image(self, path: Path, user_id: int)->int:
-        """
-        Adds image to db. Returns the id of the new entry, returns none if it already existed
-        """
+    def get_images(self, start: int, fetch_amount: int)->Generator[Image]:
         cur = self.conn.cursor()
-        command = """
-        INSERT INTO images (path, user_id) VALUES (%s, %s)
-        ON CONFLICT (path, user_id) 
-        DO UPDATE SET path = EXCLUDED.path
-        RETURNING id
-        """
-        cur.execute(command, (str(path), user_id))
-        id = cur.fetchone()
-        if id:
-            return int(id[0])
-        else: 
-            raise ValueError("No ID returned from add_image")
+        cur.execute("SELECT id, path, user_id FROM images WHERE id >= %s", (start,))
+        results = cur.fetchmany(fetch_amount)
 
-    def add_user(self, name: str)->int|None:
-        cur = self.conn.cursor()
-        command = """
-        INSERT INTO users (name) VALUES (%s)
-        ON CONFLICT (name) DO NOTHING
-        RETURNING id
-        """
-        cur.execute(command, (name,))
-        id = cur.fetchone()
-        if id:
-            return int(id[0])
-        else:
-            return None
+        for id, path ,uid in results:
+            yield Image(id, Path(path), uid)
 
     def get_user_id(self, name: str)->int:
         cur = self.conn.cursor()
