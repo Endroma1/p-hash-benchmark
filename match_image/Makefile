@@ -11,7 +11,7 @@ $(DEPS): requirements.txt | $(VENV)
 	touch $(DEPS)
 
 run: $(DEPS) 
-	$(PYTHON) ./src/app.py
+	$(PYTHON) -m uvicorn match_image.app:app --host 0.0.0.0 --port 8003
 
 clean:
 	rm -rf $(VENV) $(DEPS)

@@ -17,6 +17,10 @@ class HashMethodIDNotFound(Exception):
     def __str__(self) -> str:
         return f"Hashing method {self.name}, not found. Is it in the DB?"
 
+@dataclass
+class IDNotReturned(Exception):
+    def __str__(self) -> str:
+        return "ID not returned from add method"
 class Database(ContextDecorator):
     def __init__(self, dbname:str, user:str, password:str, host:str, port:int) -> None:
         self.conn = psycopg2.connect(dbname=dbname, user=user, password=password, host=host, port=port)
@@ -28,10 +32,20 @@ class Database(ContextDecorator):
 
         return [ModifiedImage(id ,p , n, hm) for id, p, n ,hm in result]
 
-    def send_hash(self, hash: str, img_id:int, hashing_method_name:str):
-        hash_method_id = self.get_hash_method_id(hashing_method_name)
-        cur = self.conn.cursor()
-        cur.execute("INSERT INTO hashes (hash, modified_image_id, hashing_method_id) VALUES (%s, %s, %s) ON CONFLICT DO NOTHING", (hash, img_id,hash_method_id))
+    def send_hash(self, hash: str, img_id:int, hashing_method_id:int):
+        command = """
+        INSERT INTO hashes (hash, modified_image_id, hashing_method_id) VALUES (%s, %s, %s) 
+        ON CONFLICT (path) DO NOTHING;
+        DO UPDATE SET path = EXCLUDED.path
+        RETURNING id
+        """
+        with self.conn.cursor() as cur:
+            cur.execute(command, (hash, img_id,hashing_method_id))
+            result = cur.fetchone()
+            if result is None:
+                raise IDNotReturned()
+
+        return int(result[0])
 
     def get_hash_method_id(self, hash_method_name:str)->int:
         cur = self.conn.cursor()
@@ -42,10 +56,20 @@ class Database(ContextDecorator):
 
         return int(result[0])
 
-    def add_hash_method(self,hash_method_name:str)->Self:
-        cur = self.conn.cursor()
-        cur.execute("INSERT INTO hashing_methods (name) VALUES (%s) ON CONFLICT (name) DO NOTHING", (hash_method_name,))
-        return self
+    def add_hash_method(self,hash_method_name:str)->int:
+        command = """
+        INSERT INTO hashing_methods (name) (%s) 
+        ON CONFLICT (name) DO NOTHING;
+        DO UPDATE SET path = EXCLUDED.path
+        RETURNING id
+        """
+        with self.conn.cursor() as cur:
+            cur.execute(command, (hash_method_name,))
+            result = cur.fetchone()
+            if result is None:
+                raise IDNotReturned()
+
+        return int(result[0])
         
     def commit(self):
         self.conn.commit()

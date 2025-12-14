@@ -1,7 +1,7 @@
 from contextlib import ContextDecorator
 import psycopg2
 from typing import  Self
-import config as cf
+from match_image import config as cf
 from dataclasses import dataclass
 
 class EmptyDatabaseError(Exception):
@@ -26,6 +26,12 @@ class HashMethod:
     id:int
     name:str | None = None
 
+@dataclass
+class IDNotReturned(Exception):
+    def __str__(self) -> str:
+        return "ID not returned when attempted to add to db"
+
+
 class Database(ContextDecorator):
     def __init__(self, dbname:str, user:str, password:str, host:str, port:int) -> None:
         self.conn = psycopg2.connect(dbname=dbname, user=user, password=password, host=host, port=port)
@@ -37,13 +43,20 @@ class Database(ContextDecorator):
         config = cf.Config.from_env()
         return cls(config.postgresql_db, config.postgresql_user, config.postgresql_passwd, config.postgresql_host, config.postgresql_port)
 
-    def add_hamming_distance(self, hd:float, img_id1:int, img_id2:int):
+    def add_hamming_distance(self, hd:float, img_id1:int, img_id2:int)->int:
         command = """
-        INSERT INTO matches (hamming_distance, hash_id1, hash_id2) VALUES (%s, %s, %s)
+        INSERT INTO matches (hamming_distance, hash_id1, hash_id2) 
+        VALUES (%s, %s, %s)
+        DO UPDATE SET path = EXCLUDED.path
+        RETURNING id
         """
-        cur = self.conn.cursor()
-        cur.execute(command, (hd, img_id1, img_id2))
-        cur.close()
+        with self.conn.cursor() as cur:
+            cur.execute(command, (hd, img_id1, img_id2))
+            result = cur.fetchone()
+            if result is None:
+                raise IDNotReturned()
+
+        return int(result[0])
 
     def get_hash(self, id:int, method_id:int):
         cur = self.conn.cursor()

@@ -1,21 +1,34 @@
+from dataclasses import dataclass
 from typing import Generator 
-import db
+from match_image import db
 import time
 import psycopg2
 
 def main():
-    process_images()
+    for _ in Matcher.start_iter():
+        pass
+
+@dataclass
+class Match:
+    id: int
+    hamming_distance: float
+    hash_id1: int
+    hash_id2: int
     
-def process_images():
-    """
-    Compares each hash in each hashing method.
-    """
-    with db.Database.from_config() as database:
-        for hash_method in iter_hash_methods(database):
-            for hash in iter_hashes(database, hash_method.id):
-                for compare in iter_hashes(database,hash_method.id, min_id=hash.id):   # min_id: Start at the id of the current hash being compared. This way, (A,B) and (B,A) are skipped
-                    hamming = match_images(hash.hash, compare.hash)
-                    database.add_hamming_distance(hamming, hash.id, compare.id)
+class Matcher:
+    @staticmethod
+    def start_iter():
+        """
+        Compares each hash in each hashing method.
+        """
+        with db.Database.from_config() as database:
+            for hash_method in iter_hash_methods(database):
+                for hash in iter_hashes(database, hash_method.id):
+                    for compare in iter_hashes(database,hash_method.id, min_id=hash.id):   # min_id: Start at the id of the current hash being compared. This way, (A,B) and (B,A) are skipped
+                        hamming = match_images(hash.hash, compare.hash)
+                        id = database.add_hamming_distance(hamming, hash.id, compare.id)
+
+                        yield Match(id, hamming, hash.id, compare.id)
 
 def iter_hashes(database:db.Database, method_id:int, min_id:int = 1)->Generator[db.Hash]:
     """

@@ -11,6 +11,11 @@ class ModificationIDNotFound(Exception):
         return f"Could not find id for modification {self.name}. Is it in the DB?"
 
 @dataclass
+class IDNotReturned(Exception):
+    def __str__(self) -> str:
+        return f"Adding did not return ID"
+
+@dataclass
 class Image:
     id: int
     path: Path
@@ -37,15 +42,21 @@ class Database(ContextDecorator):
         else:
             raise ValueError(f"Could not find user {name}")
 
-    def add_mod_image(self, path:Path, name:str, image_id:int, mod_name:str):
-        mod_id:int = self.get_mod_id(mod_name)
+    def add_mod_image(self, path:Path, image_id:int, mod_id:int)->int:
         command = """
         INSERT INTO modified_images (path, image_id, modification_id) VALUES (%s, %s, %s) 
         ON CONFLICT (path) DO NOTHING;
+        DO UPDATE SET path = EXCLUDED.path
+        RETURNING id
         """
-        cur = self.conn.cursor()
-        cur.execute(command, (str(path),image_id, mod_id))
-        cur.close()
+        with self.conn.cursor() as cur:
+            cur.execute(command, (str(path),image_id, mod_id))
+            result = cur.fetchone()
+
+            if result is None:
+                raise IDNotReturned()
+
+        return int(result[0])
 
     def get_mod_id(self, mod_name:str)->int:
         cur = self.conn.cursor()
@@ -57,10 +68,21 @@ class Database(ContextDecorator):
 
         return result[0]
 
-    def add_modification(self, mod_name:str)->Self:
-        cur = self.conn.cursor()
-        cur.execute("INSERT INTO modifications (name) VALUES (%s) ON CONFLICT (name) DO NOTHING;",(mod_name,))
-        return self
+    def add_modification(self, mod_name:str)->int:
+        command = """
+        INSERT INTO modifications (name) (%s) 
+        ON CONFLICT (name) DO NOTHING;
+        DO UPDATE SET path = EXCLUDED.path
+        RETURNING id
+        """
+        with self.conn.cursor() as cur:
+            cur.execute(command, (mod_name,))
+            result = cur.fetchone()
+            
+            if result is None:
+                raise IDNotReturned()
+
+        return int(result[0])
 
     def commit(self):
         """
