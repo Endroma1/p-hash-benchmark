@@ -41,6 +41,7 @@ async def main():
 
         resp = await client.post(f"{CONFIG.loader_url}/load/next", json={"limit": 10})
         result:dict = resp.json()
+        logging.info(f"Got images {result}")
 
         loaded: list[LoadResponse] = [LoadResponse(**item) for item in result["images"]]
 

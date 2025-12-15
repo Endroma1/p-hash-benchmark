@@ -16,6 +16,13 @@ services:
       - p-hash-net
     ports:
       - "8001:8000"
+    environment:
+      POSTGRESQL_HOST: db
+      POSTGRESQL_PORT: 5432
+      POSTGRESQL_PASSWORD: admin
+    volumes:
+      - loader-images:/root/.local/share/p-hash/images
+      - modified-images:/root/.cache/p_hash/mod_imgs
 
   modifier:
     build:
@@ -63,3 +70,6 @@ services:
       MATCHER_URL: "http://matcher:8000"
 networks:
   p-hash-net: {}
+volumes:
+  loader-images:
+  modified-images:
