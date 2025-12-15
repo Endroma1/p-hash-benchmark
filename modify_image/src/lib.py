@@ -1,10 +1,10 @@
 from dataclasses import dataclass
 from pathlib import Path
 from PIL import Image
-from .src import image
-from .src import modification 
-from .src import db
-from .src import config as cf
+from src import image
+from src import modification 
+from src import db
+from src import config as cf
 import hashlib
 from typing import Generator
 

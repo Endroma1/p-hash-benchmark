@@ -3,7 +3,7 @@ from . import router
 
 app = FastAPI(title="Hash Matcher")
 
-app.include_router(router)
+app.include_router(router.router)
 
 
 

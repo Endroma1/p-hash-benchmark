@@ -1,8 +1,8 @@
 from typing import Generator
-from .src import config as cf
+from . import config as cf
 from dataclasses import dataclass
 from pathlib import Path
-from .src import db
+from . import db
 import psycopg2
 
 CONFIG:cf.Config = cf.Config.from_env()

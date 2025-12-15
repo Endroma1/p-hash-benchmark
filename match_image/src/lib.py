@@ -1,8 +1,7 @@
 from dataclasses import dataclass
 from typing import Generator 
-from .src import db
+from src import db
 import asyncio
-import time
 import psycopg2
 
 

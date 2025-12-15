@@ -1,9 +1,9 @@
 from dataclasses import dataclass
 from typing import Generator
 import psycopg2
-from .src import config as cf
-from .src import db
-from .src import hash_image
+from src import config as cf
+from src import db
+from src import hash_image
 import time
 from PIL import Image
 

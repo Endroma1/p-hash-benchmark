@@ -3,6 +3,6 @@ from . import router
 
 app = FastAPI(title="Image Hasher")
 
-app.include_router(router)
+app.include_router(router.router)
 
 

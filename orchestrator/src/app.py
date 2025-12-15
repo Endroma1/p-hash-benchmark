@@ -1,7 +1,11 @@
-from .src import config
+from . import config
 import asyncio
 import httpx
 from pydantic import BaseModel
+import logging
+
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 CONFIG = config.Config.from_env()
 
@@ -26,10 +30,13 @@ class HashResponse(BaseModel):
 async def main():
     async with httpx.AsyncClient() as client:
         while True:
-            resp= await client.post(f"{CONFIG.loader_url}/load/health")
+            resp= await client.get(f"{CONFIG.loader_url}/load/health")
             result = resp.json()
-            if result["status"] == "ok":
-                break
+            try:
+                if result["status"] == "ok":
+                    break
+            except KeyError as e:
+                logger.warning(f"Endpoint not found {e}")
             await asyncio.sleep(5)
 
         resp = await client.post(f"{CONFIG.loader_url}/load/next", json={"limit": 10})
@@ -38,37 +45,49 @@ async def main():
         loaded: list[LoadResponse] = [LoadResponse(**item) for item in result["images"]]
 
 
+        logger.info("Starting modification")
         for load in loaded:
             while True:
-                resp= await client.post(f"{CONFIG.modifier_url}/load/health")
+                resp= await client.get(f"{CONFIG.modifier_url}/load/health")
                 result = resp.json()
-                if result["status"] == "ok":
-                    break
-                await asyncio.sleep(5)
-                
+                    
+                try:
+                    if result["status"] == "ok":
+                        break
+                except KeyError as e:
+                    logger.warning(f"Endpoint not found {e}")
+            await asyncio.sleep(5)
             resp = await client.post(f"{CONFIG.modifier_url}/modify/next", json={"image": load.model_dump(),"limit": 10})
             result = resp.json()
 
             mods: list[ModifiedImageResponse] = [ModifiedImageResponse(**item) for item in result["modified_images"]]
 
 
+            logger.info("Starting hashing")
             for mod in mods:
                 while True:
-                    resp= await client.post(f"{CONFIG.hasher_url}/load/health")
+                    resp= await client.get(f"{CONFIG.hasher_url}/load/health")
                     result = resp.json()
-                    if result["status"] == "ok":
-                        break
+                    try:
+                        if result["status"] == "ok":
+                            break
+                    except KeyError as e:
+                        logger.warning(f"Endpoint not found {e}")
                     await asyncio.sleep(5)
                 resp = await client.post(f"{CONFIG.hasher_url}/hash/next", json={"modified_image": mod.model_dump(), "limit":10})
                 result = resp.json()
 
 
 
+        logger.info("Starting matching")
         while True:
-            resp= await client.post(f"{CONFIG.matcher_url}/load/health")
+            resp= await client.get(f"{CONFIG.matcher_url}/load/health")
             result = resp.json()
-            if result["status"] == "ok":
-                break
+            try:
+                if result["status"] == "ok":
+                    break
+            except KeyError as e:
+                logger.warning(f"Endpoint not found {e}")
             await asyncio.sleep(5)
         resp = await client.post(f"{CONFIG.matcher_url}/match/start")
     

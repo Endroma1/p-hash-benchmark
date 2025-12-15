@@ -1,7 +1,7 @@
 from fastapi import APIRouter
 from pydantic import BaseModel
-from .src import db
-from .src import config as cf
+from src import db
+from src import config as cf
 from . import lib
 from pathlib import Path
 
