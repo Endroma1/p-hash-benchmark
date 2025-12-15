@@ -1,9 +1,8 @@
 from typing import Generator
-import time
-from load_image import config as cf
+from .src import config as cf
 from dataclasses import dataclass
 from pathlib import Path
-from load_image import db
+from .src import db
 import psycopg2
 
 CONFIG:cf.Config = cf.Config.from_env()

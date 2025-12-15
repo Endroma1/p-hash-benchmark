@@ -11,7 +11,7 @@ $(DEPS): requirements.txt | $(VENV)
 	touch $(DEPS)
 
 run: $(DEPS) 
-	$(PYTHON) -m uvicorn hash_image.app:app --host 0.0.0.0 --port 8002
+	$(PYTHON) -m uvicorn app:app --host 0.0.0.0 --port 8001
 
 clean:
 	rm -rf $(VENV) $(DEPS)

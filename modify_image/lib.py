@@ -1,11 +1,11 @@
 from dataclasses import dataclass
 from pathlib import Path
 from PIL import Image
-from modify_image import image
-from modify_image import modification 
-from modify_image import db
+from .src import image
+from .src import modification 
+from .src import db
+from .src import config as cf
 import hashlib
-from modify_image import config as cf
 from typing import Generator
 
 @dataclass

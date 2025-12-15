@@ -1,8 +1,8 @@
-from fastapi import FastAPI
+from fastapi import APIRouter
 from pydantic import BaseModel
-from hash_image import lib
+from . import lib
 
-app=FastAPI(title="Image hasher")
+router = APIRouter()
 
 class ModImageInput(BaseModel):
     id:int
@@ -21,7 +21,7 @@ class HashResponse(BaseModel):
     hash_method_id:int
     
 
-@app.post("/hash")
+@router.post("/hash/next")
 def hash_image(req):
     hashes = []
 
@@ -40,5 +40,8 @@ def hash_image(req):
         if len(hashes) >= req.limit:
             break
 
-    return {"modified_images": hashes}
+    return {"hashes": hashes}
 
+@router.get("/hash/health")
+def health():
+    return {"status": "ok"}

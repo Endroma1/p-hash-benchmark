@@ -1,11 +1,11 @@
-from fastapi import FastAPI
+from fastapi import APIRouter
 from pydantic import BaseModel
-from modify_image import db
-from modify_image import config as cf
-from modify_image import lib
+from .src import db
+from .src import config as cf
+from . import lib
 from pathlib import Path
 
-app = FastAPI(title="Image Modification Service")
+router = APIRouter()
 CONFIG:cf.Config = cf.Config.from_env()
 
 class ImageInput(BaseModel):
@@ -26,7 +26,7 @@ class ModifiedImageResponse(BaseModel):
     image_id:int
     modification_id:int
 
-@app.post("/modify")
+@router.post("/modify/next")
 def modify_image(req: ModifyRequest):
     images = []
 
@@ -46,3 +46,7 @@ def modify_image(req: ModifyRequest):
             break
 
     return {"modified_images": images}
+
+@router.get("/modify/health")
+def health():
+    return {"status": "ok"}

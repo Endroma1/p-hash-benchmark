@@ -1,9 +1,9 @@
 from dataclasses import dataclass
 from typing import Generator
 import psycopg2
-from hash_image import config as cf
-from hash_image import db
-from hash_image import hash_image
+from .src import config as cf
+from .src import db
+from .src import hash_image
 import time
 from PIL import Image
 
@@ -16,8 +16,6 @@ class Hash:
     modified_image_id:int
     hashing_method_id:int
 
-def main():
-    pass
 
 class Hasher:
     @staticmethod
@@ -45,12 +43,3 @@ def open_image(img: db.ModifiedImage):
     Image.open(img.image_path)
 
 
-if __name__ == "__main__":
-    while True:
-        try:
-            main()
-        except psycopg2.OperationalError:
-            time.sleep(1)
-            continue
-
-        break

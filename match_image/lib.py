@@ -1,12 +1,10 @@
 from dataclasses import dataclass
 from typing import Generator 
-from match_image import db
+from .src import db
+import asyncio
 import time
 import psycopg2
 
-def main():
-    for _ in Matcher.start_iter():
-        pass
 
 @dataclass
 class Match:
@@ -17,7 +15,7 @@ class Match:
     
 class Matcher:
     @staticmethod
-    def start_iter():
+    async def start_iter():
         """
         Compares each hash in each hashing method.
         """
@@ -29,6 +27,9 @@ class Matcher:
                         id = database.add_hamming_distance(hamming, hash.id, compare.id)
 
                         yield Match(id, hamming, hash.id, compare.id)
+
+                        if id % 50 == 0:
+                            await asyncio.sleep(0)
 
 def iter_hashes(database:db.Database, method_id:int, min_id:int = 1)->Generator[db.Hash]:
     """
@@ -71,12 +72,3 @@ def match_images(hash1:str, hash2:str)->float:
 
     return distance / total_bits
 
-if __name__ == "__main__":
-    while True:
-        try:
-            main()
-        except psycopg2.OperationalError:
-            time.sleep(1)
-            continue
-
-        break

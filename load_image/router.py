@@ -1,10 +1,8 @@
-from fastapi import FastAPI
+from fastapi import APIRouter
 from pydantic import BaseModel
-from load_image import lib
+from . import lib
 
-app = FastAPI(title="Image loader service")
-
-
+router = APIRouter()
 
 class LoadRequest(BaseModel):
     limit: int = 10
@@ -14,7 +12,7 @@ class ImageResponse(BaseModel):
     path: str
     user_id: int
 
-@app.post("/load/next")
+@router.post("/load/next")
 def load_next(req: LoadRequest):
     images = []
 
@@ -34,7 +32,7 @@ def load_next(req: LoadRequest):
 
     return {"images": images}
 
-@app.get("/health")
+@router.get("/load/health")
 def health():
     return {"status": "ok"}
 

@@ -1,7 +1,7 @@
 from contextlib import ContextDecorator
 import psycopg2
 from typing import  Self
-from match_image import config as cf
+from . import config as cf
 from dataclasses import dataclass
 
 class EmptyDatabaseError(Exception):

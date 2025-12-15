@@ -1,0 +1,65 @@
+version: "3.9"
+services:
+  db:
+    image: p-hash-db
+    networks:
+      - p-hash-net
+    ports:
+      - "5432:5432"
+
+  loader:
+    build:
+      context: ./load_image/
+      dockerfile: Containerfile
+    image: p-hash-load
+    networks:
+      - p-hash-net
+    ports:
+      - "8000:8004"
+
+  modifier:
+    build:
+      context: ./modify_image/
+      dockerfile: Containerfile
+    image: p-hash-mod
+    networks:
+      - p-hash-net
+    ports:
+      - "8000:8003"
+
+  hasher:
+    build:
+      context: ./hash_image/
+      dockerfile: Containerfile
+    image: p-hash-hash
+    networks:
+      - p-hash-net
+    ports:
+      - "8000:8002"
+
+  matcher:
+    build:
+      context: ./match_image/
+      dockerfile: Containerfile
+    image: p-hash-match
+    networks:
+      - p-hash-net
+    ports:
+      - "8000:8001"
+
+  orchestrator:
+    build:
+      context: ./orchestrator/
+      dockerfile: Containerfile
+    image: p-hash-orchestrator
+    networks:
+      - p-hash-net
+    ports:
+      - "8000:8000"
+    environment:
+      LOADER_URL: "http://loader:8000"
+      MODIFIER_URL: "http://modifier:8000"
+      HASHER_URL: "http://hasher:8000"
+      MATCHER_URL: "http://matcher:8000"
+networks:
+  p-hash-net: {}
