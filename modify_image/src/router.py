@@ -30,7 +30,7 @@ class ModifiedImageResponse(BaseModel):
 def modify_image(req: ModifyRequest):
     images = []
 
-    loader = lib.ImageModifier
+    loader = lib.ImageModifier(req.limit)
 
     for img in loader.start_iter(req.image.into_db_image()):
         images.append(

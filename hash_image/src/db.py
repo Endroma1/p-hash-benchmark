@@ -25,6 +25,8 @@ class Database(ContextDecorator):
     def __init__(self, dbname:str, user:str, password:str, host:str, port:int) -> None:
         self.conn = psycopg2.connect(dbname=dbname, user=user, password=password, host=host, port=port)
 
+    def close(self):
+        self.conn.close()
     def get_images(self, start: int, fetch_amount: int)->list[ModifiedImage]:
         cur = self.conn.cursor()
         cur.execute("SELECT * FROM modified_images WHERE id >= %s", (start,))
@@ -47,12 +49,12 @@ class Database(ContextDecorator):
 
         return int(result[0])
 
-    def get_hash_method_id(self, hash_method_name:str)->int:
+    def get_hash_method_id(self, hash_method_name:str)->int|None:
         cur = self.conn.cursor()
         cur.execute("SELECT id FROM hashing_methods WHERE name = (%s)", (hash_method_name,))
         result = cur.fetchone()
         if result is None:
-            raise HashMethodIDNotFound(hash_method_name)
+            return None
 
         return int(result[0])
 

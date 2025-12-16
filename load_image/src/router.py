@@ -3,9 +3,7 @@ from pydantic import BaseModel
 import time
 import psycopg2
 from . import lib
-import logging
-from .lib import CONFIG
-logger = logging.getLogger(__name__)
+from .lib import CONFIG, logger
 router = APIRouter()
 
 class LoadRequest(BaseModel):
@@ -21,8 +19,7 @@ def load_next(req: LoadRequest):
     wait_for_db(CONFIG.postgresql_host, CONFIG.postgresql_port, CONFIG.postgresql_user, CONFIG.postgresql_passwd, CONFIG.postgresql_db)
     images = []
 
-    loader = lib.ImageLoader
-
+    loader = lib.ImageLoader(req.limit)
     try:
         for img in loader.start_iter():
             images.append(

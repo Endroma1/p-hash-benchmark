@@ -7,6 +7,9 @@ class Database(ContextDecorator):
     def __init__(self, dbname:str, user:str, password:str, host:str, port:int) -> None:
         self.conn = psycopg2.connect(dbname=dbname, user=user, password=password, host=host, port=port)
 
+    def close(self):
+        self.conn.close()
+
     def add_image(self, path: Path, user_id: int)->int:
         """
         Adds image to db. Returns the id of the new entry, returns none if it already existed

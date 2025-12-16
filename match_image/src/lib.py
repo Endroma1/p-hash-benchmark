@@ -20,6 +20,7 @@ class Matcher:
         """
         with db.Database.from_config() as database:
             for hash_method in iter_hash_methods(database):
+                database.commit()
                 for hash in iter_hashes(database, hash_method.id):
                     for compare in iter_hashes(database,hash_method.id, min_id=hash.id):   # min_id: Start at the id of the current hash being compared. This way, (A,B) and (B,A) are skipped
                         hamming = match_images(hash.hash, compare.hash)

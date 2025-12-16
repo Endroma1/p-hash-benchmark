@@ -25,6 +25,9 @@ class Database(ContextDecorator):
     def __init__(self, dbname:str, user:str, password:str, host:str, port:int) -> None:
         self.conn = psycopg2.connect(dbname=dbname, user=user, password=password, host=host, port=port)
 
+    def close(self):
+        self.conn.close()
+
     def get_images(self, start: int, fetch_amount: int)->Generator[Image]:
         cur = self.conn.cursor()
         cur.execute("SELECT id, path, user_id FROM images WHERE id >= %s", (start,))
@@ -58,13 +61,13 @@ class Database(ContextDecorator):
 
         return int(result[0])
 
-    def get_mod_id(self, mod_name:str)->int:
+    def get_mod_id(self, mod_name:str)->int|None:
         cur = self.conn.cursor()
         cur.execute("SELECT id FROM modifications WHERE name = (%s)", (mod_name,))
         result = cur.fetchone()
 
         if result is None:
-            raise ModificationIDNotFound(mod_name)
+            return None
 
         return result[0]
 

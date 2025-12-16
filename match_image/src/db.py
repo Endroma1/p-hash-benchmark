@@ -38,10 +38,14 @@ class Database(ContextDecorator):
 
         self.max_id:int | None = None
 
+
     @classmethod
     def from_config(cls)->Self:
         config = cf.Config.from_env()
         return cls(config.postgresql_db, config.postgresql_user, config.postgresql_passwd, config.postgresql_host, config.postgresql_port)
+
+    def commit(self):
+        self.conn.commit()
 
     def add_hamming_distance(self, hd:float, img_id1:int, img_id2:int)->int:
         command = """
