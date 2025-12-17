@@ -1,0 +1,60 @@
+version: "3.9"
+services:
+  db:
+    image: p-hash-db
+    networks:
+      - p-hash-net
+    ports:
+      - "5432:5432"
+
+  loader:
+    build:
+      context: ./load_image/
+      dockerfile: Containerfile
+    image: p-hash-load
+    networks:
+      - p-hash-net
+    ports:
+      - "8001:8000"
+    environment:
+      POSTGRESQL_HOST: db
+      POSTGRESQL_PORT: 5432
+      POSTGRESQL_PASSWORD: admin
+    volumes:
+      - ${HOME}/.local/share/p-hash/images:/root/.local/share/p-hash/images
+      - modified-images:/root/.cache/p_hash/mod_imgs
+
+  modifier:
+    build:
+      context: ./modify_image/
+      dockerfile: Containerfile
+    image: p-hash-mod
+    networks:
+      - p-hash-net
+    ports:
+      - "8002:8000"
+
+  hasher:
+    build:
+      context: ./hash_image/
+      dockerfile: Containerfile
+    image: p-hash-hash
+    networks:
+      - p-hash-net
+    ports:
+      - "8003:8000"
+
+  matcher:
+    build:
+      context: ./match_image/
+      dockerfile: Containerfile
+    image: p-hash-match
+    networks:
+      - p-hash-net
+    ports:
+      - "8004:8000"
+
+networks:
+  p-hash-net: {}
+volumes:
+  modified-images:

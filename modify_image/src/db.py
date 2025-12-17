@@ -1,7 +1,7 @@
 from contextlib import ContextDecorator
 from dataclasses import dataclass
 import psycopg2
-from typing import Self
+from typing import Generator, Self
 from pathlib import Path
 
 @dataclass
@@ -10,41 +10,40 @@ class ModificationIDNotFound(Exception):
     def __str__(self) -> str:
         return f"Could not find id for modification {self.name}. Is it in the DB?"
 
+@dataclass
+class IDNotReturned(Exception):
+    def __str__(self) -> str:
+        return f"Adding did not return ID"
+
+@dataclass
+class Image:
+    id: int
+    path: Path
+    user_id: int
+
 class Database(ContextDecorator):
     def __init__(self, dbname:str, user:str, password:str, host:str, port:int) -> None:
         self.conn = psycopg2.connect(dbname=dbname, user=user, password=password, host=host, port=port)
 
-    def add_image(self, path: Path, user_id: int)->int:
-        """
-        Adds image to db. Returns the id of the new entry, returns none if it already existed
-        """
-        cur = self.conn.cursor()
-        command = """
-        INSERT INTO images (path, user_id) VALUES (%s, %s)
-        ON CONFLICT (path, user_id) 
-        DO UPDATE SET path = EXCLUDED.path
-        RETURNING id
-        """
-        cur.execute(command, (str(path), user_id))
-        id = cur.fetchone()
-        if id:
-            return int(id[0])
-        else: 
-            raise ValueError("No ID returned from add_image")
+    def close(self):
+        self.conn.close()
 
-    def add_user(self, name: str)->int|None:
+    def get_images(self, start: int, fetch_amount: int)->Generator[Image]:
         cur = self.conn.cursor()
-        command = """
-        INSERT INTO users (name) VALUES (%s)
-        ON CONFLICT (name) DO NOTHING
-        RETURNING id
-        """
-        cur.execute(command, (name,))
-        id = cur.fetchone()
-        if id:
-            return int(id[0])
-        else:
-            return None
+        cur.execute("SELECT id, path, user_id FROM images WHERE id >= %s", (start,))
+        results = cur.fetchmany(fetch_amount)
+
+        for id, path ,uid in results:
+            yield Image(id, Path(path), uid)
+
+    def get_mod_image_id(self, path:Path):
+        with self.conn.cursor() as cur:
+            cur.execute("SELECT id FROM modified_images WHERE path = %s", (str(path),))
+            result = cur.fetchone()
+            if result is None:
+                raise IDNotReturned()
+
+            return int(result[0])
 
     def get_user_id(self, name: str)->int:
         cur = self.conn.cursor()
@@ -55,15 +54,20 @@ class Database(ContextDecorator):
         else:
             raise ValueError(f"Could not find user {name}")
 
-    def add_mod_image(self, path:Path, name:str, image_id:int, mod_name:str):
-        mod_id:int = self.get_mod_id(mod_name)
+    def add_mod_image(self, path:Path, image_id:int, mod_id:int)->int|None:
         command = """
         INSERT INTO modified_images (path, image_id, modification_id) VALUES (%s, %s, %s) 
-        ON CONFLICT (path) DO NOTHING;
+        ON CONFLICT (path) DO NOTHING
+        RETURNING id
         """
-        cur = self.conn.cursor()
-        cur.execute(command, (str(path),image_id, mod_id))
-        cur.close()
+        with self.conn.cursor() as cur:
+            cur.execute(command, (str(path),image_id, mod_id))
+            result = cur.fetchone()
+
+            if result is None:
+                return None
+
+        return int(result[0])
 
     def get_mod_id(self, mod_name:str)->int:
         cur = self.conn.cursor()
@@ -71,14 +75,24 @@ class Database(ContextDecorator):
         result = cur.fetchone()
 
         if result is None:
-            raise ModificationIDNotFound(mod_name)
+            raise ModificationIDNotFound("mod_name")
 
         return result[0]
 
-    def add_modification(self, mod_name:str)->Self:
-        cur = self.conn.cursor()
-        cur.execute("INSERT INTO modifications (name) VALUES (%s) ON CONFLICT (name) DO NOTHING;",(mod_name,))
-        return self
+    def add_modification(self, mod_name:str)->int |None:
+        command = """
+        INSERT INTO modifications (name) VALUES (%s) 
+        ON CONFLICT (name) DO NOTHING
+        RETURNING id
+        """
+        with self.conn.cursor() as cur:
+            cur.execute(command, (mod_name,))
+            result = cur.fetchone()
+            
+            if result is None:
+                return None
+
+        return int(result[0])
 
     def commit(self):
         """
