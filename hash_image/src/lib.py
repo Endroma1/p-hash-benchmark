@@ -57,14 +57,17 @@ class Hasher:
                 loaded_img = open_image.convert("RGB").copy()
 
             hash = Method().hash_image(loaded_img)
-            hash_method_id = self.database.get_hash_method_id(name) or self.database.add_hash_method(name)
+            hash_method_id = self.database.add_hash_method(name) or self.database.get_hash_method_id(name)
 
             self.pending += 1
 
             if self.pending >= self.batch_size:
                 self.database.commit()
                 self.pending = 0
-            id = self.database.send_hash(hash, img.id, hash_method_id)
+            id = self.database.send_hash(hash, img.id, hash_method_id) 
+            if id is None:
+                logging.info(f"Hash {hash} from image {img.id} with method {hash_method_id} already found in db")
+                continue
 
             yield Hash(id, hash, img.id, hash_method_id)
 

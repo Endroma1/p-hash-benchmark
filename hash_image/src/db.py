@@ -8,7 +8,7 @@ from pathlib import Path
 class ModifiedImage:
     id: int
     image_path: Path
-    name: str
+    image_id: int
     hasing_method_id: int
 
 @dataclass
@@ -33,43 +33,51 @@ class Database(ContextDecorator):
         result = cur.fetchmany(fetch_amount)
 
         return [ModifiedImage(id ,p , n, hm) for id, p, n ,hm in result]
+    def get_hash_id(self, hash:str, mod_img_id:int, hashing_method:int)->int:
 
-    def send_hash(self, hash: str, img_id:int, hashing_method_id:int):
+        with self.conn.cursor() as cur:
+            cur.execute("SELECT id FROM hashes WHERE hash = %s AND modified_image_id = %s AND hashing_method_id = %s", (hash,mod_img_id, hashing_method))
+            result = cur.fetchone()
+            if result is None:
+                raise IDNotReturned()
+
+            return int(result[0])
+
+    def send_hash(self, hash: str, img_id:int, hashing_method_id:int)->int|None:
         command = """
         INSERT INTO hashes (hash, modified_image_id, hashing_method_id) VALUES (%s, %s, %s) 
-        ON CONFLICT (path) DO NOTHING;
-        DO UPDATE SET path = EXCLUDED.path
+        ON CONFLICT ON CONSTRAINT unique_image_hash 
+        DO NOTHING
         RETURNING id
         """
         with self.conn.cursor() as cur:
             cur.execute(command, (hash, img_id,hashing_method_id))
             result = cur.fetchone()
             if result is None:
-                raise IDNotReturned()
+                return None
 
         return int(result[0])
 
-    def get_hash_method_id(self, hash_method_name:str)->int|None:
+    def get_hash_method_id(self, hash_method_name:str)->int:
         cur = self.conn.cursor()
         cur.execute("SELECT id FROM hashing_methods WHERE name = (%s)", (hash_method_name,))
         result = cur.fetchone()
         if result is None:
-            return None
+            raise IDNotReturned()
 
         return int(result[0])
 
-    def add_hash_method(self,hash_method_name:str)->int:
+    def add_hash_method(self,hash_method_name:str)->int|None:
         command = """
-        INSERT INTO hashing_methods (name) (%s) 
-        ON CONFLICT (name) DO NOTHING;
-        DO UPDATE SET path = EXCLUDED.path
+        INSERT INTO hashing_methods (name) VALUES (%s) 
+        ON CONFLICT (name) DO NOTHING
         RETURNING id
         """
         with self.conn.cursor() as cur:
             cur.execute(command, (hash_method_name,))
             result = cur.fetchone()
             if result is None:
-                raise IDNotReturned()
+                return None
 
         return int(result[0])
         

@@ -35,7 +35,9 @@ def load_next(req: LoadRequest):
     except Exception as e:
         logger.warning(f"Failed to get image: {e}")
 
-    return {"images": images}
+    returning = {"images": images}
+    logger.info(f"Returning images: {returning}")
+    return returning
 
 def wait_for_db(host, port, user, password, dbname, retries=10, delay=5):
     """

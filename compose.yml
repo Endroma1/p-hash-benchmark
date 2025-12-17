@@ -25,7 +25,6 @@ services:
       POSTGRESQL_PASSWORD: admin
     volumes:
       - ${HOME}/.local/share/p-hash/images:/root/.local/share/p-hash/images
-      - modified-images:/root/.cache/p_hash/mod_imgs
 
   modifier:
     build:
@@ -36,6 +35,13 @@ services:
       - p-hash-net
     ports:
       - "8002:8000"
+    environment:
+      POSTGRESQL_HOST: db
+      POSTGRESQL_PORT: 5432
+      POSTGRESQL_PASSWORD: admin
+    volumes:
+      - ${HOME}/.local/share/p-hash/images:/root/.local/share/p-hash/images
+      - modified-images:/root/.cache/p_hash/mod_imgs
 
   hasher:
     build:
@@ -46,6 +52,12 @@ services:
       - p-hash-net
     ports:
       - "8003:8000"
+    environment:
+      POSTGRESQL_HOST: db
+      POSTGRESQL_PORT: 5432
+      POSTGRESQL_PASSWORD: admin
+    volumes:
+      - modified-images:/root/.cache/p_hash/mod_imgs
 
   matcher:
     build:
@@ -56,6 +68,10 @@ services:
       - p-hash-net
     ports:
       - "8004:8000"
+    environment:
+      POSTGRESQL_HOST: db
+      POSTGRESQL_PORT: 5432
+      POSTGRESQL_PASSWORD: admin
 
   orchestrator:
     build:

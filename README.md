@@ -24,10 +24,11 @@ Prerequisites:
 - Python 3.11+
 - Linux (Tested on arch)
 
-1. Set `$POSTGRESQL_PASSWORD` environment variable
-2. Add images to the `$HOME/.local/share/p-hash/images/` directory
-3. run `start_all_components.sh`
-4. Use SQL to extract data, schema found in `db/init.sql `
+1. Add images to the `$HOME/.local/share/p-hash/images/` directory
+2. run `rebuild.sh`
+3. connect to `http://localhost:8005`
+4. run `/admin/start/all`. Then after all images are hashed run `/admin/start/match`
+5. Use SQL to extract data, schema found in `db/init.sql `
 
 ### Adding Methods
 To add modifications/hashing_methods add them to the `modify_image/src/modification.py` or `hash_image/src/hash_image.py`. Use the `@Modifications`  or `@HashingMethods` decorators and implement the `Modification` or `HashinMethod` interface.

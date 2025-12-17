@@ -36,6 +36,15 @@ class Database(ContextDecorator):
         for id, path ,uid in results:
             yield Image(id, Path(path), uid)
 
+    def get_mod_image_id(self, path:Path):
+        with self.conn.cursor() as cur:
+            cur.execute("SELECT id FROM modified_images WHERE path = %s", (str(path),))
+            result = cur.fetchone()
+            if result is None:
+                raise IDNotReturned()
+
+            return int(result[0])
+
     def get_user_id(self, name: str)->int:
         cur = self.conn.cursor()
         cur.execute("SELECT id FROM users WHERE name = (%s)", (name,))
@@ -45,11 +54,10 @@ class Database(ContextDecorator):
         else:
             raise ValueError(f"Could not find user {name}")
 
-    def add_mod_image(self, path:Path, image_id:int, mod_id:int)->int:
+    def add_mod_image(self, path:Path, image_id:int, mod_id:int)->int|None:
         command = """
         INSERT INTO modified_images (path, image_id, modification_id) VALUES (%s, %s, %s) 
-        ON CONFLICT (path) DO NOTHING;
-        DO UPDATE SET path = EXCLUDED.path
+        ON CONFLICT (path) DO NOTHING
         RETURNING id
         """
         with self.conn.cursor() as cur:
@@ -57,25 +65,24 @@ class Database(ContextDecorator):
             result = cur.fetchone()
 
             if result is None:
-                raise IDNotReturned()
+                return None
 
         return int(result[0])
 
-    def get_mod_id(self, mod_name:str)->int|None:
+    def get_mod_id(self, mod_name:str)->int:
         cur = self.conn.cursor()
         cur.execute("SELECT id FROM modifications WHERE name = (%s)", (mod_name,))
         result = cur.fetchone()
 
         if result is None:
-            return None
+            raise ModificationIDNotFound("mod_name")
 
         return result[0]
 
-    def add_modification(self, mod_name:str)->int:
+    def add_modification(self, mod_name:str)->int |None:
         command = """
-        INSERT INTO modifications (name) (%s) 
-        ON CONFLICT (name) DO NOTHING;
-        DO UPDATE SET path = EXCLUDED.path
+        INSERT INTO modifications (name) VALUES (%s) 
+        ON CONFLICT (name) DO NOTHING
         RETURNING id
         """
         with self.conn.cursor() as cur:
@@ -83,7 +90,7 @@ class Database(ContextDecorator):
             result = cur.fetchone()
             
             if result is None:
-                raise IDNotReturned()
+                return None
 
         return int(result[0])
 

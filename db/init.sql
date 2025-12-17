@@ -45,4 +45,8 @@ CREATE TABLE IF NOT EXISTS matches (
 ALTER TABLE hashes
 ADD CONSTRAINT unique_image_hash UNIQUE (modified_image_id, hashing_method_id, hash);
 
+ALTER TABLE matches
+ADD CONSTRAINT unique_matches UNIQUE (hamming_distance, hash_id1, hash_id2);
+
+-- Default user if not specified
 INSERT INTO users (name) VALUES ('undefined');

@@ -52,6 +52,7 @@ class ImageModifier():
     def _process_iter(self,img_obj:db.Image)->Generator[ModifiedImage]:
         """
         Processes each image, opens it, modifies it, and saves it to a hashed path. Returns modified image path
+        If the image already exists, it is skipped on return (not on load)
         """
         save_path = CONFIG.modified_img_path
         for mod_name, Mod in modification.Modifications().modifications.items(): 
@@ -66,7 +67,7 @@ class ImageModifier():
             save_filepath = (save_path / hash).with_suffix('.png')
 
             image.save_image(save_filepath, mod_img)
-            mod_id:int = self.database.get_mod_id(mod_name) or self.database.add_modification(mod_name)
+            mod_id:int =  self.database.add_modification(mod_name) or self.database.get_mod_id(mod_name)
 
             self.pending += 1
 
@@ -74,10 +75,13 @@ class ImageModifier():
                 self.database.commit()
                 self.pending = 0
 
-            id = self.database.add_mod_image(save_filepath, img_obj.id, mod_id)
+            id = self.database.add_mod_image(save_filepath, img_obj.id, mod_id) 
+            if id is None:
+                logging.info(f"Already found {save_filepath} in db")
+                continue
 
-            yield ModifiedImage(id, save_filepath, img_obj.id, mod_id)
 
+            yield ModifiedImage(id, save_filepath, img_obj.id, mod_id) 
 def hash_image(img:Image.Image)->str:
     hasher = hashlib.blake2b(usedforsecurity=False)
     hasher.update(img.tobytes())

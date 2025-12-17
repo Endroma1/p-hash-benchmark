@@ -3,7 +3,14 @@ from typing import Generator
 from src import db
 import asyncio
 import psycopg2
+import logging
 
+logger = logging.getLogger(__name__)
+
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s %(levelname)s [%(name)s] %(message)s",
+)
 
 @dataclass
 class Match:
@@ -25,6 +32,10 @@ class Matcher:
                     for compare in iter_hashes(database,hash_method.id, min_id=hash.id):   # min_id: Start at the id of the current hash being compared. This way, (A,B) and (B,A) are skipped
                         hamming = match_images(hash.hash, compare.hash)
                         id = database.add_hamming_distance(hamming, hash.id, compare.id)
+
+                        if id is None:
+                            logging.info(f"Match with values hamming: {hamming}, image_id1: {hash.id} image_id2: {compare.id} already exists")
+                            continue
 
                         yield Match(id, hamming, hash.id, compare.id)
 

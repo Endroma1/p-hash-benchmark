@@ -47,18 +47,18 @@ class Database(ContextDecorator):
     def commit(self):
         self.conn.commit()
 
-    def add_hamming_distance(self, hd:float, img_id1:int, img_id2:int)->int:
+    def add_hamming_distance(self, hd:float, img_id1:int, img_id2:int)->int|None:
         command = """
         INSERT INTO matches (hamming_distance, hash_id1, hash_id2) 
         VALUES (%s, %s, %s)
-        DO UPDATE SET path = EXCLUDED.path
+        ON CONFLICT ON CONSTRAINT unique_matches DO NOTHING
         RETURNING id
         """
         with self.conn.cursor() as cur:
             cur.execute(command, (hd, img_id1, img_id2))
             result = cur.fetchone()
             if result is None:
-                raise IDNotReturned()
+                return None
 
         return int(result[0])
 

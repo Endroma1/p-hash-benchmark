@@ -32,7 +32,7 @@ services:
     networks:
       - p-hash-net
     ports:
-      - "8000"
+      - "8002:8000"
 
   hasher:
     build:
@@ -42,7 +42,7 @@ services:
     networks:
       - p-hash-net
     ports:
-      - "8000"
+      - "8003:8000"
 
   matcher:
     build:
@@ -52,7 +52,7 @@ services:
     networks:
       - p-hash-net
     ports:
-      - "8000"
+      - "8004:8000"
 
 networks:
   p-hash-net: {}

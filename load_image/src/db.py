@@ -10,15 +10,14 @@ class Database(ContextDecorator):
     def close(self):
         self.conn.close()
 
-    def add_image(self, path: Path, user_id: int)->int:
+    def add_image(self, path: Path, user_id: int)->int|None:
         """
         Adds image to db. Returns the id of the new entry, returns none if it already existed
         """
         cur = self.conn.cursor()
         command = """
         INSERT INTO images (path, user_id) VALUES (%s, %s)
-        ON CONFLICT (path, user_id) 
-        DO UPDATE SET path = EXCLUDED.path
+        ON CONFLICT (path, user_id) DO NOTHING
         RETURNING id
         """
         cur.execute(command, (str(path), user_id))
@@ -26,7 +25,7 @@ class Database(ContextDecorator):
         if id:
             return int(id[0])
         else: 
-            raise ValueError("No ID returned from add_image")
+            return None
 
     def add_user(self, name: str)->int|None:
         cur = self.conn.cursor()

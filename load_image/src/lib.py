@@ -46,12 +46,14 @@ class ImageLoader():
 
     def _process_images_iter(self)->Generator[Image]:
         """
-        Processes each image by sending to db and creating image object to return
+        Processes each image by sending to db and creating image object to return. If the image exists it is skipped
         """
         for file, user in read_images_iter(CONFIG):
             logger.info(f"Processing image: {file}, user: {user}")
             user_id = self.database.add_user(user) or self.database.get_user_id(user)
             img_id = self.database.add_image(file, user_id)
+            if img_id is None:
+                continue
 
             self.pending += 1
 
@@ -64,7 +66,7 @@ class ImageLoader():
 
 def read_images_iter(config:cf.Config)->Generator[tuple[Path, str]]:
     """
-    Reads images from config dir returning (path, user)
+    Reads images from config dir returning (path, user). 
     """
     base_dir = config.input_img_path
 

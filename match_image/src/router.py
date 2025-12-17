@@ -4,6 +4,7 @@ from fastapi import APIRouter
 from pydantic import BaseModel
 from . import lib
 from enum import Enum
+from .lib import logger
 
 import asyncio
 
@@ -11,6 +12,7 @@ class MatchState(str, Enum):
     DONE = "done"
     IN_PROGRESS = "in progress"
     FAILED = "failed"
+    STOPPED = "stopped"
 
 class MatchStatus(BaseModel):
     state: MatchState
@@ -19,7 +21,7 @@ class MatchStatus(BaseModel):
 
 router = APIRouter()
 
-state =  MatchStatus(state=MatchState.IN_PROGRESS, processed=0)
+state =  MatchStatus(state=MatchState.STOPPED, processed=0)
 
 @router.post("/match/start")
 async def match_hashes():
@@ -35,14 +37,14 @@ async def match_hashes():
             async for _ in loader.start_iter():
                 state.processed += 1
 
-        except Exception:
+        except Exception as e:
             state.state = MatchState.FAILED
+            logger.error(e)
             return
 
         state.state = MatchState.DONE
 
-    loop = asyncio.get_event_loop()
-    match_task = loop.create_task(run_match())
+    asyncio.create_task(run_match())
     return {"state": state}
 
 @router.post("/match/status")
