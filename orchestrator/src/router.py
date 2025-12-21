@@ -16,3 +16,7 @@ async def start_all_components():
 async def start_matching():
     asyncio.create_task(run_matching())
     return {"state": "started"}
+
+@router.post("/admin/modifications/get")
+async def get_modifications():
+    asyncio.create_task()

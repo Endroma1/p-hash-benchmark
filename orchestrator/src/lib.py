@@ -1,3 +1,4 @@
+from abc import ABC, abstractclassmethod, abstractmethod
 from dataclasses import dataclass
 from typing import Any, AsyncGenerator, Callable, Optional, TypeVar 
 from . import config
@@ -52,8 +53,142 @@ class MatchStatusResponse(ComponentResponse):
     state: MatchState
     processed: int
 
+class Component(ABC):
+    def __init__(self, name:str, health_path:str, url:str) -> None:
+        self.name = name
+        self._client = httpx.AsyncClient()
+        self.url = url
+        self.health_path = health_path
+
+    @abstractmethod
+    async def is_up(self,retries:int = 10, interval:int = 10)->bool:
+        """
+        Healthchecks the component. Return true if up, false if down
+        """
+        pass
+    @abstractmethod
+    async def start_component(self):
+        """
+        Starts the component
+        """
+        pass
+
+    @abstractmethod
+    async def post(self, path:str, json:dict|None)->dict:
+        """
+        Gets a post from the component. 
+        """
+        pass
+
+    @abstractmethod
+    async def get(self, path:str)->dict:
+        pass
+
 @dataclass
-class Component:
+class ComponentTools:
+    component:Component
+    async def health_check(self, client:httpx.AsyncClient, health_path:str, retries: int, interval: int)->bool:
+
+        assert client is not None
+
+        health_retries = 1
+        while True:
+            try:
+                logger.info(f"Checking health for {self.component.url}{health_path}")
+                result = await self.component.get(health_path)
+                logger.info(f"Got response {result} from healthcheck")
+            except httpx.ConnectError:
+                logging.warning(f"Could not find client {self.component.url} for health check. Retrying...")
+                await asyncio.sleep(interval)
+                continue
+            except asyncio.CancelledError:
+                logger.warning(f"Health check task was cancelled for {self.component.url}")
+                raise
+
+            try:
+                if result["status"] == "ok":
+                    logging.info(f"Healthcheck succeded for {self.component.url}")
+                    break
+            except Exception as e:
+                if health_retries > retries:
+                    logging.error(f"Healthcheck failed for {self.component.url}")
+                    return False
+                logger.warning(f"Endpoint not found {e}, attempt {health_retries}/{retries} . Retrying...")
+                health_retries += 1
+            await asyncio.sleep(interval)
+        return True 
+
+    async def get_post_iter(self,url:str, path:str,response_key:str,json:dict|None = None, retries = 5, interval = 5)->AsyncGenerator[ComponentResponse|None] :
+        """
+        Gets a response that consists of a key:list type json. Yields each item in the list, None if no more items are found.
+
+        path: Path to enpoint on component
+        json: json payload to component
+        retries: How many times to retry if error is raised
+        interval: Time between retries
+
+        return: ComponentResponse or None if no components were received
+        """
+        tries = 0
+        while True:
+            try:
+                logging.info(f"Posting to {self.component.url}{path} with json: \n{json}")
+                result = await self.component.post(path, json)
+            except Exception as e: 
+                tries +=1
+                logging.warning(f"Could not find client {url}. Error: {e}.  Retrying... ({tries}/{retries})")
+                await asyncio.sleep(interval)
+                continue
+
+            tries = 0
+
+            logging.info(f"Got {result} from {url}")
+
+            items = result.get(response_key, [])
+
+            if not items:
+                logging.info(f"No more results received from {url}.")
+                yield None
+
+
+            if isinstance(items, dict):
+                items = [items]
+
+            for item in result[response_key]:   
+                yield item
+            break
+
+@dataclass
+class Pipeline:
+    """
+    The pipeline for running a component
+    """
+    component: Component
+    path: str
+    response_key:str
+    json: dict
+    response_type: type[ComponentResponse]
+
+    _client: httpx.AsyncClient = httpx.AsyncClient()
+    
+
+    async def component_pipeline(self):
+        if not self.component.is_up():
+            raise HealthCheckError(self.component.name)
+
+        while True:
+            logging.info(f"Started {self.component.name}")
+            async for result in self._get_post_iter():
+                logging.info(f"Putting {result} in out queue")
+                await out_queue.put(result)
+
+
+@dataclass
+class LoadImage(Component):
+    _client = httpx.AsyncClient()
+
+@dataclass
+class Componenta:
     """
     Represents a p-hash component. Attempts to get the data from the component if health check succeeds.
     """
@@ -72,6 +207,8 @@ class Component:
             async for result in self.start_iter(path, json):
                 logging.info(f"Putting {result} in out queue")
                 await out_queue.put(result)
+
+
 
     async def start_io_queue(self, in_queue:asyncio.Queue[ComponentResponse], out_queue:asyncio.Queue, path:str, json_func:Callable[[ComponentResponse], dict]):
         """
@@ -231,6 +368,18 @@ class Component:
 
             await asyncio.sleep(interval)
 
+    async def get(self, path:str)->dict:
+        """
+        Gets the content from given path. Returns json dict
+        """
+        logging.info("Getting modifications")
+        async with httpx.AsyncClient() as client:
+            r = await client.get(f"{self.url}{path}")
+            json = r.json()
+
+            return json
+            
+
     async def __aenter__(self):
         return self
 
@@ -290,6 +439,9 @@ async def run_matching():
         response = await client.post(f"{CONFIG.matcher_url}/match/start")
         json = response.json()
         logging.info(f"Started matching: {json}")
+
+
+
 
 
 if __name__ == "__main__":

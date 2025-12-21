@@ -7,6 +7,7 @@ from . import lib
 from .lib import CONFIG, logger
 from pathlib import Path
 import time
+from . import modification
 
 router = APIRouter()
 
@@ -29,7 +30,7 @@ class ModifiedImageResponse(BaseModel):
     modification_id:int
 
 @router.post("/modify/next")
-def modify_image(req: ModifyRequest):
+async def modify_image(req: ModifyRequest):
     wait_for_db(CONFIG.postgresql_host, CONFIG.postgresql_port, CONFIG.postgresql_user, CONFIG.postgresql_passwd, CONFIG.postgresql_db)
     images = []
 
@@ -50,7 +51,7 @@ def modify_image(req: ModifyRequest):
 
     return {"modified_images": images}
 
-def wait_for_db(host, port, user, password, dbname, retries=10, delay=5):
+async def wait_for_db(host, port, user, password, dbname, retries=10, delay=5):
     """
     Polls PostgreSQL until it accepts connections.
     """
@@ -73,5 +74,22 @@ def wait_for_db(host, port, user, password, dbname, retries=10, delay=5):
     raise RuntimeError(f"Database {host}:{port} not ready after {retries} attempts")
 
 @router.get("/modify/health")
-def health():
+async def health():
     return {"status": "ok"}
+
+class Modification(BaseModel):
+    name: str
+    obj: modification.Modification
+
+class Modifications(BaseModel):
+    modificaions: list[Modification]
+
+@router.get("/modify/get")
+async def get_modifications():
+    modifications = [Modification(name, obj) for name, obj in modification.Modifications().modifications]
+    m_obj = Modifications(modifications)
+    return {"modifications": m_obj}
+
+    
+
+
